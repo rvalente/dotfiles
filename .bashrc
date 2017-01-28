@@ -39,4 +39,4 @@ GIT_PS1_SHOWDIRTYSTATE=1
 source "$(brew --prefix)/etc/bash_completion.d/git-prompt.sh"
 
 # Set Prompt
-PS1='[$(clr_blue \u)@$(clr_brown \h)][$(clr_red \W)]$(__git_ps1 " (%s)")\$ \[$(tput sgr0)\]'
+export PS1="[\[$(tput sgr0)\]\[\033[38;5;4m\]\u\[$(tput sgr0)\]\[\033[38;5;15m\]@\[$(tput sgr0)\]\[\033[38;5;3m\]\h\[$(tput sgr0)\]\[\033[38;5;15m\]][\[$(tput sgr0)\]\[\033[38;5;6m\]\W\[$(tput sgr0)\]\[\033[38;5;15m\]]\\$ \[$(tput sgr0)\]"
