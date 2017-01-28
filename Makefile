@@ -24,7 +24,7 @@ pkgs: ## Install Required Homebrew Packages
 ifndef BREW
 	$(error "brew is not available please install homebrew")
 endif
-	brew install go git xz pt wget bash-completion packer hub vim python shellcheck tree 
+	brew install go git xz pt wget bash-completion packer hub vim python shellcheck tree
 	pip install --upgrade pip setuptools ansible
 
 fonts: ## Install Fonts
