@@ -18,7 +18,6 @@ Homebrew packages that are included are:
   * vim
   * shellcheck
   * tree
-  * fasd
 
 Python packages that are installed/upgraded from pip are:
 
