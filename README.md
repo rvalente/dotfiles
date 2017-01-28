@@ -57,4 +57,3 @@ Ensure you close your active terminal window after you change your shell.
 ## Credits
 
 Makefile Awesome-ness: https://github.com/b4b4r07/dotfiles
-Bash Colors: https://github.com/maxtsepkov/bash_colors
