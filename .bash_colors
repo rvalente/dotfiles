@@ -1,3 +1,5 @@
+# ~/.bash_colors
+
 # Reset
 Color_Off='\e[0m'       # Text Reset
 

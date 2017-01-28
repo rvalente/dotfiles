@@ -1,9 +1,11 @@
+# ~/.bash_aliases
+
 # Sysadmin Aliases
 alias ls='ls -GF'
 alias ll='ls -GFlah'
 alias h=history
-alias ps='ps auxww'
-alias psg='ps aux | grep'
+alias ps='/bin/ps auxww'
+alias psg='/bin/ps auxww | grep'
 alias tf='tail -f'
 
 # Hub Integration

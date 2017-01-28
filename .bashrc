@@ -1,4 +1,4 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
+# ~/.bashrc; executed by bash(1) for non-login shells.
 
 # If not running interactively, don't do anything
 case $- in
@@ -25,9 +25,6 @@ shopt -s checkwinsize
 # match all files and zero or more directories and subdirectories.
 shopt -s globstar
 
-# Turn On FASD
-eval "$(fasd --init auto)"
-
 # Load Colors
 [ -f ~/.bash_colors ] && source ~/.bash_colors
 
@@ -37,7 +34,7 @@ eval "$(fasd --init auto)"
 # Turn on Git Prompt
 GIT_PS1_SHOWUNTRACKEDFILES=1
 GIT_PS1_SHOWUPSTREAM="auto"
-source $(brew --prefix)/etc/bash_completion.d/git-prompt.sh
+source "$(brew --prefix)/etc/bash_completion.d/git-prompt.sh"
 
 # Set Prompt
 PROMPT_COMMAND='__git_ps1 "${Color_Off}[${Blue}\u${Color_Off}@${Yellow}\h${Color_Off}][\W]" "\\\$ "'

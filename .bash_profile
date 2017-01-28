@@ -1,3 +1,5 @@
+# ~/.bash_profile
+
 # Ensure we're using Vim!
 export EDITOR=vim
 export VISUAL=vim
@@ -11,11 +13,11 @@ export LSCOLORS=ExFxBxDxCxegedabagacad
 export GOPATH=$HOME/go
 export PATH=$HOME/bin:$PATH:$GOPATH/bin
 
-# Load Bash Completion
+# Enable Homebrew Completion
 [ -f /usr/local/etc/bash_completion ] && source /usr/local/etc/bash_completion
 
-# Load the .secrets
+# Load Secrets
 [ -r ~/.secrets ] && source ~/.secrets
 
-# Load the .bashrc
+# Run our Interactive Shell bashrc
 [ -r ~/.bashrc ] && source ~/.bashrc

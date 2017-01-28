@@ -5,8 +5,8 @@
 [color]
 	ui     = always
 	branch = auto
-    diff   = auto
-    status = auto
+	diff   = auto
+	status = auto
 [color "diff-highlight"]
 	oldNormal    = red bold
 	oldHighlight = red bold 52
@@ -24,8 +24,6 @@
 	algorithm = histogram
 	compactionHeuristic = true
 [alias]
-	st    = status
-	s     = status -sb
 	co    = checkout
 	graph = log --graph --date-order --all --pretty=format:'%h %Cred%d %Cgreen%ad %Cblue%cn %Creset%s' --date=short
 [help]
