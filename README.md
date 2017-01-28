@@ -54,6 +54,14 @@ chsh -s /usr/local/bin/bash
 
 Ensure you close your active terminal window after you change your shell.
 
+## Fonts
+
+Run `make fonts` to install the Hack font into `~/Library/Fonts/`.
+
+## iTerm Colors
+
+I personally prefer the `base16-ocean.dark.256`, in order to use it, type `Cmd-,` in `iTerm2.app` and then go to `Profile > Colors > Color Presets... > Import` and navigate to the repo and import the colorscheme.
+
 ## Credits
 
 Makefile Awesome-ness: https://github.com/b4b4r07/dotfiles
