@@ -35,9 +35,8 @@ export CDPATH=.:$HOME/code
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases
 
 # Turn on Git Prompt
-GIT_PS1_SHOWUNTRACKEDFILES=1
-GIT_PS1_SHOWUPSTREAM="auto"
+GIT_PS1_SHOWDIRTYSTATE=1
 source "$(brew --prefix)/etc/bash_completion.d/git-prompt.sh"
 
 # Set Prompt
-#PROMPT_COMMAND='\[ __git_ps1 "${Color_Off}[${Blue}\u${Color_Off}@${Yellow}\h${Color_Off}][\W]" "\\\$ "\]'
+PS1='[$(clr_blue \u)@$(clr_brown \h)][$(clr_red \W)]$(__git_ps1 " (%s)")\$ \[$(tput sgr0)\]'
