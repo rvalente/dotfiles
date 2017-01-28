@@ -1,36 +1,39 @@
 [core]
-	editor = vim
+	editor       = vim
 	preloadindex = true
 	excludesfile = ~/.gitignore
 [color]
-	ui = always
+	ui     = always
+	branch = auto
+    diff   = auto
+    status = auto
 [color "diff-highlight"]
-	oldNormal = red bold
+	oldNormal    = red bold
 	oldHighlight = red bold 52
-	newNormal = green bold
+	newNormal    = green bold
 	newHighlight = green bold 22
 [color "diff"]
-	commit = green
-	meta = yellow
-	frag = cyan
-	old = red
-	new = green
+	commit     = green
+	meta       = yellow
+	frag       = cyan
+	old        = red
+	new        = green
 	whitespace = red reverse
 [diff]
 	tool      = vimdiff
 	algorithm = histogram
 	compactionHeuristic = true
 [alias]
-	st = status
-	co = checkout
-	ci = commit
+	st    = status
+	s     = status -sb
+	co    = checkout
 	graph = log --graph --date-order --all --pretty=format:'%h %Cred%d %Cgreen%ad %Cblue%cn %Creset%s' --date=short
 [help]
 	autocorrect = 1
 [pager]
-	log = diff-highlight | less
-	show = diff-highlight | less
-	diff = diff-highlight | less
+	log  = /usr/local/share/git-core/contrib/diff-highlight/diff-highlight | less
+	show = /usr/local/share/git-core/contrib/diff-highlight/diff-highlight | less
+	diff = /usr/local/share/git-core/contrib/diff-highlight/diff-highlight | less
 [include]
 	path = ~/.gitconfig.local
 [pack]
