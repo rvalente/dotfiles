@@ -23,13 +23,36 @@ Python packages that are installed/upgraded from pip are:
 
   * pip
   * setuptools
-  * python-openstackclient
   * ansible
-  * pep8
-  
+
 ## Installation
 
-Simply run `make install` and you will have the dotfiles deployed.
+### Prerequisites
+
+Ensure you have Homebrew installed
+
+```
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+
+Once installed, simply run `make install` and you will have the dotfiles deployed.
+
+## Recommendations
+
+I highly recommend getting a newer version of bash installed.
+
+```
+# Install Non Ancient Bash
+brew install bash
+
+# Now ensure your Mac is configured to use the new shell.
+echo "/usr/local/bin/bash" | sudo tee -a /etc/shells
+
+# Now set your default shell to bash
+chsh -s /usr/local/bin/bash
+```
+
+Ensure you close your active terminal window after you change your shell.
 
 ## Credits
 
