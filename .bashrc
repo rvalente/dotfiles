@@ -25,6 +25,9 @@ shopt -s checkwinsize
 # match all files and zero or more directories and subdirectories.
 shopt -s globstar
 
+# Support Awesome cdpath
+export CDPATH=.:$HOME/code
+
 # Load Colors
 [ -f ~/.bash_colors ] && source ~/.bash_colors
 
@@ -37,4 +40,4 @@ GIT_PS1_SHOWUPSTREAM="auto"
 source "$(brew --prefix)/etc/bash_completion.d/git-prompt.sh"
 
 # Set Prompt
-PROMPT_COMMAND='__git_ps1 "${Color_Off}[${Blue}\u${Color_Off}@${Yellow}\h${Color_Off}][\W]" "\\\$ "'
+#PROMPT_COMMAND='\[ __git_ps1 "${Color_Off}[${Blue}\u${Color_Off}@${Yellow}\h${Color_Off}][\W]" "\\\$ "\]'

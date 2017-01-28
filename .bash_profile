@@ -5,6 +5,10 @@ export EDITOR=vim
 export VISUAL=vim
 export PAGER='less -m'
 
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export TERM=xterm-256color
+
 # Enable Colors
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
