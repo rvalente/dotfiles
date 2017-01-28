@@ -34,3 +34,4 @@ Simply run `make install` and you will have the dotfiles deployed.
 ## Credits
 
 Makefile Awesome-ness: https://github.com/b4b4r07/dotfiles
+Bash Colors: https://github.com/maxtsepkov/bash_colors
