@@ -21,9 +21,18 @@ HISTFILESIZE=2000
 # update the values of the LINES and COLUMNS.
 shopt -s checkwinsize
 
+# Complete Hosts
+shopt -s hostcomplete
+
+# Example Aliases for Security
+shopt -s expand_aliases
+
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
 shopt -s globstar
+
+# Disable Core Dumps
+ulimit -c 0
 
 # Support Awesome cdpath
 export CDPATH=.:$HOME/code
@@ -34,8 +43,9 @@ export CDPATH=.:$HOME/code
 # Load Aliases
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases
 
-# Turn on Git Prompt
-GIT_PS1_SHOWDIRTYSTATE=1
+# Setup Git Prompt Variables
+export GIT_PS1_SHOWDIRTYSTATE=true
+export GIT_PS1_SHOWUNTRACKEDFILES=true
 source "$(brew --prefix)/etc/bash_completion.d/git-prompt.sh"
 
 # Set Prompt
