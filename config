@@ -1,0 +1,10 @@
+Include ~/.ssh/config.local
+
+Host github.com
+  HostName github.com
+  User git
+
+Host *
+  ControlMaster auto
+  UseKeychain yes
+  IdentitiesOnly yes
