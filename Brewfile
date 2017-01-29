@@ -1,5 +1,8 @@
 brew 'go'
 brew 'git'
+brew 'pv'
+brew 'htop'
+brew 'lnav'
 brew 'xz'
 brew 'pt'
 brew 'wget'
