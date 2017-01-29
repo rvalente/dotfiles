@@ -16,7 +16,7 @@ cd ~/.dotfiles && ./install.sh
 
 ## After Installation
 
-Ensure you create a `.gitconfig.local` file with your username/email.
+Ensure you create a `~/.gitconfig.local` file with your username/email.
 You do not want to have this located within the `.dotfiles` repo!
 
 ```
@@ -27,3 +27,9 @@ You do not want to have this located within the `.dotfiles` repo!
 	user = GITHUB_USERNAME
 	token = GITHUB_TOKEN
 ```
+
+## Customization
+
+If you want to tweak/customize you can create a `~/.DOTFILE.local` file, this will get loaded at the end of the main file.
+
+For example, if you want to add some aliases to your setup, create a `~/.bash_aliases.local` file with all the aliases that you want.
