@@ -37,11 +37,8 @@ ulimit -c 0
 # Support Awesome cdpath
 export CDPATH=.:$HOME/code
 
-# Load Colors
-[ -f ~/.bash_colors ] && source ~/.bash_colors
-
 # Load Aliases
-[ -f ~/.bash_aliases ] && source ~/.bash_aliases
+[ -r ~/.bash_aliases ] && source ~/.bash_aliases
 
 # Setup Git Prompt Variables
 export GIT_PS1_SHOWDIRTYSTATE=true

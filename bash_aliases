@@ -19,4 +19,4 @@ alias brewu="brew update && brew upgrade && brew doctor && brew cleanup"
 alias flushdns='sudo killall -HUP mDNSResponder'
 
 # Load User Aliases
-[ -f ~/.bash_aliases.local ] && source ~/.bash_aliases.local
+[ -r ~/.bash_aliases.local ] && source ~/.bash_aliases.local

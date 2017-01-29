@@ -20,8 +20,14 @@ brew update
 # Install all our dependencies with bundle (See Brewfile)
 brew tap homebrew/bundle
 
-# TODO: Support Custom-User Brewfile so anyone can bring their own apps
-brew bundle --file="${BREWFILE}"
+# Check if we have a custom brewfile
+if [ -f $HOME/.Brewfile ]; then
+  BREWFILE="$HOME/.Brewfile"
+fi
+
+# Install User Packages
+echo "Install Packages from ${BREWFILE}..."
+brew bundle --file="$BREWFILE"
 
 # Set Newer Bash as Default Shell
 CURRENTSHELL=$(dscl . -read /Users/"$USER" UserShell | awk '{print $2}')

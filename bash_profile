@@ -21,10 +21,10 @@ export GOPATH=$HOME/go
 export PATH=$HOME/bin:$PATH:$GOPATH/bin
 
 # Enable Homebrew Completion
-[ -f /usr/local/etc/bash_completion ] && source /usr/local/etc/bash_completion
+[ -r /usr/local/etc/bash_completion ] && source /usr/local/etc/bash_completion
 
 # Load Local Bash Profile
-[ -f ~/.bash_profile.local ] && source ~/.bash_profile.local
+[ -r ~/.bash_profile.local ] && source ~/.bash_profile.local
 
 # Run our Interactive Shell bashrc
 [ -r ~/.bashrc ] && source ~/.bashrc
