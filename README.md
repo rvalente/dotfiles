@@ -13,3 +13,17 @@ git clone https://github.com/rvalente/dotfiles.git ~/.dotfiles
 # Install Dotfiles
 cd ~/.dotfiles && ./install.sh
 ```
+
+## After Installation
+
+Ensure you create a `.gitconfig.local` file with your username/email.
+You do not want to have this located within the `.dotfiles` repo!
+
+```
+[user]
+	name = GIT_NAME
+	email = GIT_EMAIL
+[github]
+	user = GITHUB_USERNAME
+	token = GITHUB_TOKEN
+```
