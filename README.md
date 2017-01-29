@@ -1,13 +1,10 @@
 # Dotfiles
 
-1. Clone Repo
+## Installation
 
 ```
+# Clone Repo to .dotfiles
 git clone https://github.com/rvalente/dotfiles.git ~/.dotfiles
-```
-
-2. Install Dotfiles
-
-```
+# Install Dotfiles
 cd ~/.dotfiles && ./install.sh
 ```
