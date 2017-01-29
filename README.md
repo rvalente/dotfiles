@@ -20,10 +20,11 @@ cd ~/.dotfiles && ./install.sh
 Ensure you create a `~/.gitconfig.local` file with your username/email.
 You do not want to have this located within the `.dotfiles` repo!
 
-```
+``` ini
 [user]
 	name = GIT_NAME
 	email = GIT_EMAIL
+
 [github]
 	user = GITHUB_USERNAME
 	token = GITHUB_TOKEN
