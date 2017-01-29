@@ -1,4 +1,5 @@
-# ~/.bash_profile
+# ~/.bash_profile; executed by bash(1) for login shells.
+
 
 # Ensure we're using Vim!
 export EDITOR=vim
@@ -22,8 +23,8 @@ export PATH=$HOME/bin:$PATH:$GOPATH/bin
 # Enable Homebrew Completion
 [ -f /usr/local/etc/bash_completion ] && source /usr/local/etc/bash_completion
 
-# Load Secrets
-[ -r ~/.secrets ] && source ~/.secrets
+# Load Local Bash Profile
+[ -f ~/.bash_profile.local ] && source ~/.bash_profile.local
 
 # Run our Interactive Shell bashrc
 [ -r ~/.bashrc ] && source ~/.bashrc

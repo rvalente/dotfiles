@@ -6,3 +6,4 @@
 * Added bash_colors
 * Set a solid set of aliases
 * Ensure we support loca files
+* Remove Makefile for Shell
