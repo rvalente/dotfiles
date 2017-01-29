@@ -1,8 +1,8 @@
 # ~/.bash_aliases
 
 # Sysadmin Aliases
-alias ls='ls -GF'
-alias ll='ls -GFlah'
+alias ls='ls -G'
+alias ll='ls -Glah'
 alias h=history
 alias ps='/bin/ps auxww'
 alias psg='/bin/ps auxww | grep'
