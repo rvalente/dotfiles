@@ -6,5 +6,6 @@ Host github.com
 
 Host *
   ControlMaster auto
-  UseKeychain yes
+  IdentityFile ~/.ssh/id_rsa
   IdentitiesOnly yes
+  UseKeychain yes

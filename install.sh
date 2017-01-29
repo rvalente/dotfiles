@@ -63,6 +63,9 @@ unset FILES_TO_SYMLINK
 # Symlink Dotfile Bin Dir
 ln -sf "$DOTFILES"/bin "$HOME"/
 
+# Symlink ssh_config
+ln -sf "$DOTFILES"/ssh_config "$HOME"/.ssh/config
+
 # Install Hack Font
 cp "$DOTFILES"/fonts/*.ttf "$HOME"/Library/Fonts/
 
