@@ -1,11 +1,22 @@
 #!/usr/bin/env bash
 
 ## Shell Opts ----------------------------------------------------------------
-set -e -u -x
+# Exit on any non-zero exit code
+set -o errexit
+
+# Exit on any unset variable
+set -o nounset
+
+# Pipeline's return status is the value of the last (rightmost) command
+# to exit with a non-zero status, or zero if all commands exit successfully.
+set -o pipefail
+
+# Enable tracing
+set -o xtrace
 
 ## Variables -----------------------------------------------------------------
-DOTFILES="$HOME/.dotfiles"
-BREWFILE="$HOME/.dotfiles/Brewfile"
+DOTFILES="$(cd "$(dirname "$0")" && pwd -P)"
+BREWFILE="${DOTFILES}/Brewfile"
 
 ## Main ----------------------------------------------------------------------
 
@@ -13,6 +24,9 @@ BREWFILE="$HOME/.dotfiles/Brewfile"
 if test ! "$(which brew)"; then
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
+
+# Turn off Homebrew Analytics; Before we do anything else!
+brew analytics off
 
 # Update Homebrew recipes
 brew update
