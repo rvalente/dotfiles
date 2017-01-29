@@ -1,4 +1,5 @@
 brew 'go'
+brew 'ansible'
 brew 'git'
 brew 'pv'
 brew 'htop'
