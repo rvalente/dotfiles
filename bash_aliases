@@ -18,5 +18,8 @@ alias gcm='git commit -m'
 alias brewu="brew update && brew upgrade && brew doctor && brew cleanup"
 alias flushdns='sudo killall -HUP mDNSResponder'
 
+# Load Functions
+[ -r ~/.functions ] && source ~/.functions
+
 # Load User Aliases
 [ -r ~/.bash_aliases.local ] && source ~/.bash_aliases.local

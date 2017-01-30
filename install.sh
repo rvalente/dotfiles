@@ -59,6 +59,7 @@ declare -a FILES_TO_SYMLINK=(
   'gitignore'
   'gitmessage'
   'inputrc'
+  'functions'
   'vimrc'
 )
 
