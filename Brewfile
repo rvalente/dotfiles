@@ -4,23 +4,14 @@ tap 'caskroom/cask'
 tap 'caskroom/fonts'
 
 # Cask
-cask 'alfred'
-cask 'basictex'
 cask 'firefox'
 cask 'flux'
 cask 'google-chrome'
-cask 'iterm2'
-cask 'omnifocus'
 cask 'qlmarkdown'
 cask 'quicklook-json'
 cask 'quicklook-csv'
-cask 'spotify'
-cask 'sublime-text'
-cask 'transmit'
-cask 'vagrant'
 
 # Fonts
-cask 'font-sauce-code-powerline'
 cask 'font-source-code-pro'
 cask 'font-source-sans-pro'
 cask 'font-source-serif-pro'
