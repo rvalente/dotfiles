@@ -40,6 +40,9 @@ export CDPATH=.:$HOME/code
 # Load Aliases
 [ -r ~/.bash_aliases ] && source ~/.bash_aliases
 
+# Load iTerm2 Integration
+[ -r ~/.iterm2_integration ] && source ~/.iterm2_integration
+
 # Setup Git Prompt Variables
 export GIT_PS1_SHOWDIRTYSTATE=true
 export GIT_PS1_SHOWUNTRACKEDFILES=true

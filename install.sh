@@ -54,12 +54,14 @@ declare -a FILES_TO_SYMLINK=(
   'bash_aliases'
   'bash_profile'
   'bashrc'
+  'functions'
   'gemrc'
   'gitconfig'
   'gitignore'
   'gitmessage'
+  'iterm2_integration'
   'inputrc'
-  'functions'
+  'tmux.conf'
   'vimrc'
 )
 

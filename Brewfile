@@ -37,6 +37,7 @@ brew 'pt'
 brew 'pv'
 brew 'python'
 brew 'shellcheck'
+brew 'tmux'
 brew 'tree'
 brew 'vim'
 brew 'wget', args: ['with-libressl']
