@@ -44,3 +44,5 @@
 	template = ~/.gitmessage
 [credential]
 	helper = osxkeychain
+[gpg]
+	program = /usr/local/bin/gpg2
