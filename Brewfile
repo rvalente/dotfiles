@@ -2,6 +2,7 @@ cask_args appdir: '/Applications'
 
 tap 'caskroom/cask'
 tap 'caskroom/fonts'
+tap 'justwatchcom/gopass'
 
 # Cask
 cask 'firefox'
@@ -25,6 +26,7 @@ brew 'curl', args: ['with-libressl', 'with-nghttp2']
 brew 'fping'
 brew 'git', args: ['with-brewed-curl']
 brew 'go'
+brew 'gopass'
 brew 'htop'
 brew 'hub'
 brew 'jq'
