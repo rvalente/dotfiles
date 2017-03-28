@@ -35,7 +35,7 @@ brew update
 brew tap homebrew/bundle
 
 # Check if we have a custom brewfile
-if [ -f $HOME/.Brewfile ]; then
+if [ -f "${HOME}/.Brewfile" ]; then
   BREWFILE="$HOME/.Brewfile"
 fi
 
@@ -81,7 +81,16 @@ unset FILES_TO_SYMLINK
 ln -sf "${DOTFILES}/bin" "$HOME"/
 
 # Symlink Dotfile vim Dir
-ln -sf "${DOTFILES}/vim" "${HOME}/.vim"
+if [ -d "${HOME}/.vim" ]; then
+  # Directory Exists, Check if Symlink
+  if [ ! -L "${HOME}/.vim" ]; then
+    # It is not a symlink, get rid of it!
+    mv "${HOME}/.vim" "${HOME}/.vim.old"
+    ln -sf "${DOTFILES}/vim" "${HOME}/.vim"
+  fi
+else
+  ln -sf "${DOTFILES}/vim" "${HOME}/.vim"
+fi
 
 # Symlink ssh_config
 ln -sf "$DOTFILES"/ssh_config "$HOME"/.ssh/config
