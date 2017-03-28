@@ -30,6 +30,13 @@ You do not want to have this located within the `.dotfiles` repo!
 	token = GITHUB_TOKEN
 ```
 
+## Update Plugins
+
+```
+git submodule update --remote --merge
+git commit
+```
+
 ## Customization
 
 If you want to tweak/customize you can create a `~/.DOTFILE.local` file, this will get loaded at the end of the main file.
