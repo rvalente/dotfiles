@@ -13,3 +13,6 @@
 [submodule "vim/pack/plugins/start/ctrlp"]
 	path = vim/pack/plugins/start/ctrlp
 	url = https://github.com/kien/ctrlp.vim
+[submodule "vim/pack/plugins/start/vim-airline"]
+	path = vim/pack/plugins/start/vim-airline
+	url = https://github.com/bling/vim-airline
