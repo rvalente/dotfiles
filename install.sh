@@ -78,7 +78,10 @@ done
 unset FILES_TO_SYMLINK
 
 # Symlink Dotfile Bin Dir
-ln -sf "$DOTFILES"/bin "$HOME"/
+ln -sf "${DOTFILES}/bin" "$HOME"/
+
+# Symlink Dotfile vim Dir
+ln -sf "${DOTFILES}/vim" "${HOME}/.vim"
 
 # Symlink ssh_config
 ln -sf "$DOTFILES"/ssh_config "$HOME"/.ssh/config
