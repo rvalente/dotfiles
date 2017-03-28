@@ -10,3 +10,6 @@
 [submodule "vim/pack/plugins/start/vim-surround"]
 	path = vim/pack/plugins/start/vim-surround
 	url = https://github.com/tpope/vim-surround
+[submodule "vim/pack/plugins/start/ctrlp"]
+	path = vim/pack/plugins/start/ctrlp
+	url = https://github.com/kien/ctrlp.vim
