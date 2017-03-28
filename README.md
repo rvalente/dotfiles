@@ -5,6 +5,10 @@
 This is designed to bootstrap a clean install of macOS Sierra quickly.
 It will overwrite all the things in your homedir with symlinks!
 
+## Submodules
+
+Note: This configuration uses git submodules for plugins, please ensure that you update your submodules once you clone the repo!
+
 ## Installation
 
 ``` bash
