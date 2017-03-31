@@ -22,3 +22,6 @@
 [submodule "vim/pack/plugins/start/vim-go"]
 	path = vim/pack/plugins/start/vim-go
 	url = https://github.com/fatih/vim-go.git
+[submodule "vim/pack/plugins/start/vim-latex"]
+	path = vim/pack/plugins/start/vim-latex
+	url = https://github.com/vim-latex/vim-latex.git
