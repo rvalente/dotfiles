@@ -35,7 +35,7 @@ shopt -s globstar
 ulimit -c 0
 
 # Support Awesome cdpath
-export CDPATH=.:$HOME/code
+export CDPATH=.:$HOME/code:$HOME/go/src/github.com
 
 # Load Aliases
 [ -r ~/.bash_aliases ] && source ~/.bash_aliases
