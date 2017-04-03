@@ -11,6 +11,7 @@ cask 'google-chrome'
 cask 'qlmarkdown'
 cask 'quicklook-json'
 cask 'quicklook-csv'
+cask 'vagrant'
 
 # Fonts
 cask 'font-source-code-pro'
@@ -19,7 +20,6 @@ cask 'font-source-serif-pro'
 cask 'font-hack'
 
 # Packages
-brew 'ansible'
 brew 'bash'
 brew 'bash-completion'
 brew 'curl', args: ['with-libressl', 'with-nghttp2']
