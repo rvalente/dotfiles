@@ -16,6 +16,9 @@ set hidden
 set mouse=a
 set mousehide
 
+" Shared Mac OS X Clipboard
+set clipboard=unnamed
+
 " More useful implementation of searching
 nnoremap ' `
 nnoremap ` '
