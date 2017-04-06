@@ -11,6 +11,8 @@ Note: This configuration uses git submodules for plugins, please ensure that you
 
 ## Installation
 
+IMPORTANT: `cp Brewfile ../.Brewfile` if you want to customize the packages that are installed.
+
 ``` bash
 # Clone Repo to .dotfiles
 git clone https://github.com/rvalente/dotfiles.git ~/.dotfiles
@@ -35,6 +37,12 @@ You do not want to have this located within the `.dotfiles` repo!
 ```
 
 ## Update Plugins
+
+IMPORTANT: If this is the first time cloning the dotfiles down...
+
+```
+git submodule init
+```
 
 ```
 git submodule update --remote --merge
