@@ -5,8 +5,8 @@ tap 'caskroom/fonts'
 tap 'justwatchcom/gopass'
 
 # Cask
+cask 'atom'
 cask 'firefox'
-cask 'flux'
 cask 'google-chrome'
 cask 'qlmarkdown'
 cask 'quicklook-json'
