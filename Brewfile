@@ -12,6 +12,7 @@ cask 'qlmarkdown'
 cask 'quicklook-json'
 cask 'quicklook-csv'
 cask 'vagrant'
+cask 'visual-studio-code'
 
 # Fonts
 cask 'font-source-code-pro'
