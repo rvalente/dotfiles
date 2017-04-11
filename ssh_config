@@ -9,7 +9,6 @@ Host *
   ControlMaster auto
   ControlPath   /private/tmp/%r@%h:%p
   ControlPersist 600
-  IdentityFile ~/.ssh/old_id_rsa
   IdentityFile ~/.ssh/id_rsa
   IdentitiesOnly yes
   UseKeychain yes
