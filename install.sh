@@ -77,9 +77,6 @@ done
 
 unset FILES_TO_SYMLINK
 
-# Symlink Dotfile Bin Dir
-ln -sf "${DOTFILES}/bin" "$HOME"/
-
 # Symlink Dotfile vim Dir
 if [ -d "${HOME}/.vim" ]; then
   # Directory Exists, Check if Symlink
