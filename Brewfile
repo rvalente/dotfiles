@@ -6,14 +6,6 @@ tap 'go-delve/delve'
 tap 'justwatchcom/gopass'
 
 # Cask
-cask 'atom'
-cask 'alfred'
-cask 'cyberduck'
-cask 'firefox'
-cask 'google-chrome'
-cask 'java'
-cask 'little-snitch'
-cask 'paw'
 cask 'qlmarkdown'
 cask 'quicklook-json'
 cask 'quicklook-csv'
@@ -32,7 +24,6 @@ cask 'font-hack'
 # Packages
 brew 'bash'
 brew 'bash-completion'
-brew 'caddy'
 brew 'curl'
 brew 'fping'
 brew 'git'
@@ -47,10 +38,12 @@ brew 'mas'
 brew 'nmap'
 brew 'packer'
 brew 'pandoc'
+brew 'nodejs'
 brew 'pinentry-mac'
 brew 'pt'
 brew 'pv'
 brew 'python'
+brew 'qemu'
 brew 'shellcheck'
 brew 'tmux'
 brew 'tree'
@@ -69,4 +62,6 @@ mas 'Microsoft Remote Desktop', id: 715768417
 mas 'MindNode', id: 992076693
 mas 'MsgFiler', id: 418778021
 mas 'Textual', id: 896450579
+mas 'Things3', id: 904280696
 mas 'Thumbtack', id: 500948998
+mas 'Tweetbot', id: 557168941
