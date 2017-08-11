@@ -9,10 +9,6 @@ tap 'justwatchcom/gopass'
 cask 'qlmarkdown'
 cask 'quicklook-json'
 cask 'quicklook-csv'
-cask 'spotify'
-cask 'spotify-notifications'
-cask 'vagrant'
-cask 'vlc'
 
 # Fonts
 cask 'font-fontawesome'
@@ -61,7 +57,6 @@ mas 'JSON Toolbox', id: 525015412
 mas 'Microsoft Remote Desktop', id: 715768417
 mas 'MindNode', id: 992076693
 mas 'MsgFiler', id: 418778021
-mas 'Textual', id: 896450579
 mas 'Things3', id: 904280696
 mas 'Thumbtack', id: 500948998
 mas 'Tweetbot', id: 557168941
