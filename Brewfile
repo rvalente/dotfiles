@@ -11,9 +11,6 @@ cask 'quicklook-csv'
 
 # Fonts
 cask 'font-fontawesome'
-cask 'font-source-code-pro'
-cask 'font-source-sans-pro'
-cask 'font-source-serif-pro'
 cask 'font-hack'
 
 # Packages
@@ -28,11 +25,8 @@ brew 'htop'
 brew 'hub'
 brew 'jq'
 brew 'lnav'
-brew 'mas'
 brew 'nmap'
 brew 'packer'
-brew 'pandoc'
-brew 'nodejs'
 brew 'pinentry-mac'
 brew 'pt'
 brew 'pv'

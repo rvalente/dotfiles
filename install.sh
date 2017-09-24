@@ -59,7 +59,6 @@ declare -a FILES_TO_SYMLINK=(
   'gitconfig'
   'gitignore'
   'gitmessage'
-  'iterm2_integration'
   'inputrc'
   'tmux.conf'
   'vimrc'
@@ -91,13 +90,6 @@ fi
 
 # Symlink ssh_config
 ln -sf "$DOTFILES"/ssh_config "$HOME"/.ssh/config
-
-# Install the iTerm2 Color Scheme
-echo "To Install iTerm2 Colorscheme run the following in iTerm2..."
-echo "open $DOTFILES/iterm2/base16-ocean.dark.256.itermcolors"
-
-# Don’t display the annoying prompt when quitting iTerm
-defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 
 # Reload our Shell
 exec bash --login
