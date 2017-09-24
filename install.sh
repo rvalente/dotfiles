@@ -90,6 +90,3 @@ fi
 
 # Symlink ssh_config
 ln -sf "$DOTFILES"/ssh_config "$HOME"/.ssh/config
-
-# Reload our Shell
-exec bash --login
