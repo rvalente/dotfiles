@@ -28,3 +28,5 @@ export PATH=$HOME/bin:/Applications/VMware\ OVF\ Tool:$PATH:$GOPATH/bin
 
 # Run our Interactive Shell bashrc
 [ -r ~/.bashrc ] && source ~/.bashrc
+
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
