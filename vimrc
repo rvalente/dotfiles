@@ -27,7 +27,7 @@ nnoremap ` '
 syntax on
 
 try
-  colorscheme base16-eighties
+  colorscheme smyck
 catch
 endtry
 
