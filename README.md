@@ -53,3 +53,8 @@ git submodule update --remote --merge
 If you want to tweak/customize you can create a `~/.DOTFILE.local` file, this will get loaded at the end of the main file.
 
 For example, if you want to add some aliases to your setup, create a `~/.bash_aliases.local` file with all the aliases that you want.
+
+
+## Credits
+
+Thanks to [Smyck](http://color.smyck.org) for making a color scheme that doesn't suck.
