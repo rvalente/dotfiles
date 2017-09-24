@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+* Moved to Smyck due to simplification
 * Ensure user has read permissions to files, not just that they exist
 * Support local Brewfile
 * Get the initial set of dotfiles going
