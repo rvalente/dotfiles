@@ -18,7 +18,7 @@ export LSCOLORS=ExFxBxDxCxegedabagacad
 
 # Setup Go Environment
 export GOPATH=$HOME/go
-export PATH=$HOME/bin:/Applications/VMware\ OVF\ Tool:$PATH:$GOPATH/bin
+export PATH=$GOPATH/bin:$HOME/bin:/Applications/VMware\ OVF\ Tool:/usr/local/sbin:$PATH
 
 # Enable Homebrew Completion
 [ -r /usr/local/etc/bash_completion ] && source /usr/local/etc/bash_completion
