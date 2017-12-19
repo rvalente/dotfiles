@@ -2,7 +2,6 @@ cask_args appdir: '/Applications'
 
 tap 'caskroom/cask'
 tap 'caskroom/fonts'
-tap 'justwatchcom/gopass'
 
 # Cask
 cask 'qlmarkdown'
@@ -14,6 +13,7 @@ cask 'font-fontawesome'
 cask 'font-hack'
 
 # Packages
+brew 'ansible'
 brew 'bash'
 brew 'bash-completion'
 brew 'curl'
@@ -30,6 +30,7 @@ brew 'packer'
 brew 'pinentry-mac'
 brew 'pt'
 brew 'pv'
+brew 'ruby'
 brew 'shellcheck'
 brew 'tmux'
 brew 'tree'
