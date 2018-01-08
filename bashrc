@@ -106,8 +106,9 @@ ulimit -c 0
 # Load Aliases
 [ -r ~/.bash_aliases ] && source ~/.bash_aliases
 
-# GIT PROMPT
-if [ -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
-  __GIT_PROMPT_DIR=$(brew --prefix)/opt/bash-git-prompt/share
-  source "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
-fi
+# Git Prompt
+GIT_PS1_SHOWCOLORHINTS=1
+GIT_PS1_SHOWDIRTYSTATE=1
+GIT_PS1_SHOWSTASHSTATE=1
+GIT_PS1_SHOWUNTRACKEDFILES=1
+PROMPT_COMMAND='__git_ps1 "[\e[34m\u\e[39m@\e[33m\h\e[39m][\e[34m\W\e[39m]" "\n\\\$ "'
