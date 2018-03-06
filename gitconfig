@@ -46,3 +46,5 @@
 	helper = osxkeychain
 [gpg]
 	program = /usr/local/bin/gpg2
+[pull]
+	rebase = true
