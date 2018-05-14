@@ -9,8 +9,8 @@ cask 'quicklook-json'
 cask 'quicklook-csv'
 
 # Fonts
-cask 'font-fontawesome'
-cask 'font-hack'
+cask 'font-anonymous-pro'
+cask 'font-anonymouspro-nerd-font'
 
 # Packages
 brew 'ansible'
@@ -31,7 +31,6 @@ brew 'pinentry-mac'
 brew 'pt'
 brew 'pv'
 brew 'reattach-to-user-namespace'
-brew 'ruby'
 brew 'ruby-install'
 brew 'shellcheck'
 brew 'tmux'
