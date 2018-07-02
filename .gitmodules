@@ -25,6 +25,3 @@
 [submodule "vim/pack/plugins/start/vim-latex"]
 	path = vim/pack/plugins/start/vim-latex
 	url = https://github.com/vim-latex/vim-latex.git
-[submodule "tmux/plugins/tpm"]
-	path = tmux/plugins/tpm
-	url = https://github.com/tmux-plugins/tpm
