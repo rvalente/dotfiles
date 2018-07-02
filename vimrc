@@ -51,9 +51,6 @@ filetype on
 filetype plugin on
 filetype indent on
 
-" Set to auto read when a file is changed from the outside
-set autoread
-
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
 let mapleader = ","
@@ -131,6 +128,9 @@ autocmd BufReadPost *
   \ endif
 
 " ======= Whitespace Management for Most Files ======
+
+set listchars=tab:>-,trail:·,eol:$
+nmap <silent> <leader>s :set nolist!<CR>
 
 " Highlight trailing whitespace
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/

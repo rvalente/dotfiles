@@ -89,4 +89,5 @@ else
 fi
 
 # Symlink ssh_config
+mkdir -p ~/.ssh
 ln -sf "$DOTFILES"/ssh_config "$HOME"/.ssh/config

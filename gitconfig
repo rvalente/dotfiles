@@ -27,7 +27,7 @@
 	co    = checkout
 	graph = log --graph --date-order --all --pretty=format:'%h %Cred%d %Cgreen%ad %Cblue%cn %Creset%s' --date=short
 [help]
-	autocorrect = 1
+	autocorrect = 0
 [pager]
 	log  = /usr/local/share/git-core/contrib/diff-highlight/diff-highlight | less
 	show = /usr/local/share/git-core/contrib/diff-highlight/diff-highlight | less
@@ -42,9 +42,10 @@
 	default = simple
 [commit]
 	template = ~/.gitmessage
+	gpgsign = true
 [credential]
 	helper = osxkeychain
 [gpg]
-	program = /usr/local/bin/gpg2
+	program = /usr/local/MacGPG2/bin/gpg2
 [pull]
 	rebase = true
