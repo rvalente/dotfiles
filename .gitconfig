@@ -25,6 +25,8 @@
 	compactionHeuristic = true
 [alias]
 	co    = checkout
+        st    = status
+        br    = branch
 	graph = log --graph --date-order --all --pretty=format:'%h %Cred%d %Cgreen%ad %Cblue%cn %Creset%s' --date=short
 [help]
 	autocorrect = 0
@@ -46,6 +48,6 @@
 [credential]
 	helper = osxkeychain
 [gpg]
-	program = /usr/local/MacGPG2/bin/gpg2
+	program = gpg
 [pull]
 	rebase = true

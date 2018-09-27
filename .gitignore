@@ -1,1 +1,6 @@
+.dotfiles
 .DS_Store
+.ssh/*
+._*
+.Spotlight-V100
+.Trashes
