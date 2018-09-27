@@ -1,0 +1,38 @@
+* DOTFILES
+
+This is designed to bootstrap a clean install of macOS quickly.
+
+** INSTALL
+
+#+BEGIN_SRC shell
+# First, create an alias to support the dotfile git dir
+alias gitdf='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
+# Clone Dotfile Repo
+git clone --bare https://github.com/rvalente/dotfiles.git $HOME/.dotfiles
+
+# Checkout Dotfiles into your Home Dir
+# NOTE: Either remove or move any conflicting dotfiles
+gitdf checkout
+
+# Thats It! Open a new Shell
+#+END_SRC
+
+** POST-INSTALL
+
+Ensure you create a `~/.gitconfig.local` file with your username/email.
+You do not want to have this located within the `.dotfiles` repo!
+
+#+BEGIN_SRC ini
+[user]
+	name = GIT_NAME
+	email = GIT_EMAIL
+
+[github]
+	user = GITHUB_USERNAME
+	token = GITHUB_TOKEN
+#+END_SRC
+
+** CREDITS
+
+Thanks to [Smyck](http://color.smyck.org) for making a color scheme that doesn't suck.
