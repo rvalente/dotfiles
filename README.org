@@ -43,6 +43,10 @@ echo "pinentry-program /usr/local/bin/pinentry-mac" >> ~/.gnupg/gpg-agent.conf
 killall gpg-agent
 #+END_SRC
 
+** CONTRIBUTORS
+
+- [[https://github.com/bensallen][Ben Allen]]
+
 ** CREDITS
 
-Thanks to [Smyck](http://color.smyck.org) for making a color scheme that doesn't suck.
+Thanks to [[http://color.smyck.org][Smyck]] for making a color scheme that doesn't suck.
