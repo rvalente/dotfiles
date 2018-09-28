@@ -30,6 +30,7 @@ You do not want to have this located within the `.dotfiles` repo!
 [user]
 	name = GIT_NAME
 	email = GIT_EMAIL
+        signingkey = SIGNING_KEY
 
 [github]
 	user = GITHUB_USERNAME
