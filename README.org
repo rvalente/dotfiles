@@ -36,6 +36,13 @@ You do not want to have this located within the `.dotfiles` repo!
 	token = GITHUB_TOKEN
 #+END_SRC
 
+Also important to note, if you receive an error when signing a commit with GPG, then run the following:
+
+#+BEGIN_SRC shell
+echo "pinentry-program /usr/local/bin/pinentry-mac" >> ~/.gnupg/gpg-agent.conf
+killall gpg-agent
+#+END_SRC
+
 ** CREDITS
 
 Thanks to [Smyck](http://color.smyck.org) for making a color scheme that doesn't suck.
