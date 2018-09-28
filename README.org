@@ -11,6 +11,9 @@ alias gitdf='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 # Clone Dotfile Repo
 git clone --bare https://github.com/rvalente/dotfiles.git $HOME/.dotfiles
 
+# Dont Show Untracked Files
+gitdf config --local status.showUntrackedFiles no
+
 # Checkout Dotfiles into your Home Dir
 # NOTE: Either remove or move any conflicting dotfiles
 gitdf checkout
