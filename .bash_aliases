@@ -6,9 +6,8 @@ alias gitdf='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 # Sysadmin Aliases
 alias ls='ls -G'
 alias ll='ls -Glah'
-alias h=history
-alias ps='/bin/ps auxww'
-alias psg='/bin/ps auxww | grep'
+alias ps='ps auxww'
+alias psg='ps auxww | grep'
 alias tf='tail -f'
 
 # Git Aliases
