@@ -15,7 +15,7 @@ set -o pipefail
 set -o xtrace
 
 ## Variables -----------------------------------------------------------------
-BREWFILE="${DOTFILES}/.Brewfile"
+BREWFILE="${HOME}/.Brewfile"
 
 ## Main ----------------------------------------------------------------------
 
