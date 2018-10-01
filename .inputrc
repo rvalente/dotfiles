@@ -22,7 +22,11 @@ set convert-meta off
 set input-meta on
 set output-meta on
 
+# Enable incremental history search with up/down arrows (also Readline goodness)
+# Learn more about this here: http://codeinthehole.com/writing/the-most-important-command-line-tip-incremental-history-searching-with-inputrc/
 # From http://www.ukuug.org/events/linux2003/papers/bash_tips/
 # Incremental searching with Up and Down. Type 'ssh <up>' to get the last 'ssh' command you used
 "\e[A": history-search-backward
 "\e[B": history-search-forward
+"\e[C": forward-char
+"\e[D": backward-char

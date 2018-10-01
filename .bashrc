@@ -41,8 +41,6 @@ shopt -s globstar 2> /dev/null
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob
 
-
-
 ## SANE HISTORY DEFAULTS ##
 
 # Append to the history file, don't overwrite it
@@ -65,15 +63,6 @@ export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear"
 # %F equivalent to %Y-%m-%d
 # %T equivalent to %H:%M:%S (24-hours format)
 HISTTIMEFORMAT='%F %T '
-
-# Enable incremental history search with up/down arrows (also Readline goodness)
-# Learn more about this here: http://codeinthehole.com/writing/the-most-important-command-line-tip-incremental-history-searching-with-inputrc/
-bind '"\e[A": history-search-backward'
-bind '"\e[B": history-search-forward'
-bind '"\e[C": forward-char'
-bind '"\e[D": backward-char'
-
-## BETTER DIRECTORY NAVIGATION ##
 
 # Prepend cd to directory names automatically
 shopt -s autocd 2> /dev/null
