@@ -23,18 +23,16 @@ gitdf checkout
 
 ** POST-INSTALL
 
-Ensure you create a `~/.gitconfig.local` file with your username/email.
-You do not want to have this located within the `.dotfiles` repo!
+Ensure you create a ~/.gitconfig.local file with your username, email, and gpg signingkey.
 
 #+BEGIN_SRC ini
 [user]
-	name = GIT_NAME
-	email = GIT_EMAIL
-        signingkey = SIGNING_KEY
-
+  name = GIT_NAME
+  email = GIT_EMAIL
+  signingkey = SIGNING_KEY
 [github]
-	user = GITHUB_USERNAME
-	token = GITHUB_TOKEN
+  user = GITHUB_USERNAME
+  token = GITHUB_TOKEN
 #+END_SRC
 
 Also important to note, if you receive an error when signing a commit with GPG, then run the following:
