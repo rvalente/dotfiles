@@ -21,8 +21,7 @@ export TERM=xterm-256color
 export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='1;32'
 export CLICOLOR=1
-#export LSCOLORS=ExFxBxDxCxegedabagacad
-export LSCOLORS=exfxcxdxbxegedabagacad
+export LSCOLORS=ExFxBxDxCxegedabagacad
 
 # Prevent file overwrite on stdout redirection
 # Use `>|` to force redirection to an existing file
@@ -41,7 +40,7 @@ shopt -s globstar 2> /dev/null
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob
 
-## SANE HISTORY DEFAULTS ##
+## History -------------------------------------------------------------------
 
 # Append to the history file, don't overwrite it
 shopt -s histappend
@@ -81,7 +80,7 @@ CDPATH="$HOME/code"
 # Complete Hosts
 shopt -s hostcomplete
 
-# Example Aliases for Security
+# Expand Aliases for Security
 shopt -s expand_aliases
 
 # Disable Core Dumps
