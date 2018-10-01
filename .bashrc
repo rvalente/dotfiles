@@ -6,6 +6,11 @@ case $- in
   *) return;;
 esac
 
+## Bash Completion -----------------------------------------------------------
+
+# Enable Homebrew Completion
+[ -f /usr/local/etc/bash_completion ] && source /usr/local/etc/bash_completion
+
 ## Environment Variables -----------------------------------------------------
 
 export PATH="/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin"
@@ -74,7 +79,6 @@ shopt -s cdspell 2> /dev/null
 
 # This defines where cd looks for targets
 # Add the directories you want to have fast access to, separated by colon
-# Ex: CDPATH=".:~:~/projects" will look for targets in the current working directory, in home and in the ~/projects folder
 CDPATH="$HOME/code"
 
 # Complete Hosts
@@ -89,7 +93,9 @@ ulimit -c 0
 # Load Aliases
 [ -r ~/.bash_aliases ] && source ~/.bash_aliases
 
-# Git Prompt
+# Prompt ---------------------------------------------------------------------
+# Leverage the Built In Git Functionality
+# /usr/local/etc/bash_completion.d/git-prompt.sh
 GIT_PS1_SHOWCOLORHINTS=1
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWSTASHSTATE=1
