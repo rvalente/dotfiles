@@ -2,9 +2,13 @@
 
 # If not running interactively, don't do anything
 case $- in
-	*i*) ;;
-	*) return;;
+  *i*) ;;
+  *) return;;
 esac
+
+## Environment Variables -----------------------------------------------------
+
+export PATH="/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin"
 
 export EDITOR=vim
 export VISUAL=$EDITOR
@@ -94,7 +98,7 @@ shopt -s cdspell 2> /dev/null
 # This defines where cd looks for targets
 # Add the directories you want to have fast access to, separated by colon
 # Ex: CDPATH=".:~:~/projects" will look for targets in the current working directory, in home and in the ~/projects folder
-CDPATH=".:$HOME/code:$HOME/go/src/github.com"
+CDPATH="$HOME/code"
 
 # Complete Hosts
 shopt -s hostcomplete
