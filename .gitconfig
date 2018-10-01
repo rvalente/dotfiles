@@ -25,8 +25,8 @@
 	compactionHeuristic = true
 [alias]
 	co    = checkout
-        st    = status
-        br    = branch
+	st    = status
+	br    = branch
 	graph = log --graph --date-order --all --pretty=format:'%h %Cred%d %Cgreen%ad %Cblue%cn %Creset%s' --date=short
 [help]
 	autocorrect = 0
