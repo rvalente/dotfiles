@@ -44,7 +44,6 @@
 	default = simple
 [commit]
 	template = ~/.gitmessage
-	gpgsign = true
 [credential]
 	helper = osxkeychain
 [gpg]
