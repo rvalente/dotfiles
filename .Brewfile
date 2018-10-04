@@ -4,6 +4,12 @@ tap 'caskroom/fonts'
 
 # Cask
 cask '1password'
+cask 'appcleaner'
+cask 'chronoagent'
+cask 'chronosync'
+cask 'dash'
+cask 'default-folder-x
+cask 'devonthink-pro-office'
 cask 'emacs'
 cask 'firefox'
 cask 'iterm2'
@@ -17,10 +23,14 @@ cask 'paw'
 cask 'qlmarkdown'
 cask 'quicklook-json'
 cask 'quicklook-csv'
+cask 'steermouse'
 cask 'textual'
+cask 'typinator'
 cask 'vagrant'
 cask 'virtualbox'
 cask 'visual-studio-code'
+cask 'webex-teams'
+cask 'wireshark'
 
 # Fonts
 cask 'font-hack'
