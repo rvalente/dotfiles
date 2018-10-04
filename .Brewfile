@@ -1,6 +1,7 @@
 cask_args appdir: '/Applications'
 
 tap 'caskroom/fonts'
+tap 'homebrew/cask-drivers'
 
 # Cask
 cask '1password'
@@ -24,6 +25,7 @@ cask 'qlmarkdown'
 cask 'quicklook-json'
 cask 'quicklook-csv'
 cask 'steermouse'
+cask 'sonos'
 cask 'textual'
 cask 'typinator'
 cask 'vagrant'
