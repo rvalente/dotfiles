@@ -5,6 +5,7 @@ tap 'caskroom/fonts'
 # Cask
 cask '1password'
 cask 'emacs'
+cask 'firefox'
 cask 'iterm2'
 cask 'launchbar'
 cask 'little-snitch'
