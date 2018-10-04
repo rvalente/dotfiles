@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 ## Shell Opts ----------------------------------------------------------------
 # Exit on any non-zero exit code
