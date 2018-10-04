@@ -1,16 +1,24 @@
 cask_args appdir: '/Applications'
 
-tap 'caskroom/cask'
 tap 'caskroom/fonts'
 
 # Cask
+cask '1password'
+cask 'emacs'
+cask 'iterm2'
+cask 'launchbar'
+cask 'little-snitch'
+cask 'paw'
 cask 'qlmarkdown'
 cask 'quicklook-json'
 cask 'quicklook-csv'
+cask 'textual'
+cask 'vagrant'
+cask 'virtualbox'
+cask 'visual-studio-code'
 
 # Fonts
-cask 'font-anonymous-pro'
-cask 'font-anonymouspro-nerd-font'
+cask 'font-hack'
 
 # Packages
 brew 'bash-completion'
@@ -32,3 +40,5 @@ brew 'shellcheck'
 brew 'tmux'
 brew 'tree'
 brew 'xz'
+
+# Mac App Store

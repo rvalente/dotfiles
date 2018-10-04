@@ -30,6 +30,9 @@ brew analytics off
 # Update Homebrew recipes
 brew update
 
+# Install Mac App Store CLI
+brew install mas
+
 # Install all our dependencies with bundle (See Brewfile)
 brew tap homebrew/bundle
 
