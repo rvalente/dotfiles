@@ -9,7 +9,7 @@ cask 'appcleaner'
 cask 'chronoagent'
 cask 'chronosync'
 cask 'dash'
-cask 'default-folder-x
+cask 'default-folder-x'
 cask 'devonthink-pro-office'
 cask 'emacs'
 cask 'firefox'
