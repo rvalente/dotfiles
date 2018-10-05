@@ -45,6 +45,7 @@ killall gpg-agent
 ** CONTRIBUTORS
 
 - [[https://github.com/bensallen][Ben Allen]]
+- [[https://github.com/aaronbradshaw][Aaron Bradshaw]]
 
 ** CREDITS
 
