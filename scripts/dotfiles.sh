@@ -20,7 +20,7 @@ BREWFILE="${HOME}/.Brewfile"
 ## Main ----------------------------------------------------------------------
 
 # Check for Homebrew and install if we don't have it
-if test ! "$(which brew)"; then
+if test ! "$(command -v brew)"; then
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 

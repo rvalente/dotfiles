@@ -12,20 +12,19 @@ set -o nounset
 set -o pipefail
 
 ## Variables -----------------------------------------------------------------
-GPG=$(which gpg)
-GPG_FLAGS=''
-BACKUP_DIR=$HOME/gpg_backup
+GPG=$(command -v gpg)
+BACKUP_DIR="$HOME/gpg_backup"
 
 HOSTNAME=$(hostname -s)
-PROGNAME=$(basename $0)
+PROGNAME=$(basename "$0")
 
 ## Functions -----------------------------------------------------------------
 err() {
-  echo "$(date +'%Y-%m-%dT%H:%M:%S%z') ${HOSTNAME} ${PROGNAME}[$$]: $@" >&2
+  echo "$(date +'%Y-%m-%dT%H:%M:%S%z') ${HOSTNAME} ${PROGNAME}[$$]: $*" >&2
 }
 
 log() {
-  echo "$(date +'%Y-%m-%dT%H:%M:%S%z') ${HOSTNAME} ${PROGNAME}[$$]: $@" >&2
+  echo "$(date +'%Y-%m-%dT%H:%M:%S%z') ${HOSTNAME} ${PROGNAME}[$$]: $*" >&2
 }
 
 ## Main ----------------------------------------------------------------------
@@ -56,15 +55,15 @@ if ! gpg --list-keys | grep "${EMAIL}" ; then
   exit 1
 fi
 
-cd $HOME
+cd "$HOME"
 
 # Remove Existing Backup Dir if Exists
 log "Removing ${BACKUP_DIR} if exists"
-[ -d $BACKUP_DIR ] && rm -rf $BACKUP_DIR
+[ -d "$BACKUP_DIR" ] && rm -rf "$BACKUP_DIR"
 
 # Create Clean Backup Directory
 log "Creating ${BACKUP_DIR}"
-mkdir -m 0700 -p $BACKUP_DIR
+mkdir -m 0700 "$BACKUP_DIR"
 
 log "Exporting Ownertrust DB"
 if ! $GPG --export-ownertrust > "$BACKUP_DIR/$(whoami)-ownertrust-gpg.txt"; then
@@ -74,23 +73,23 @@ fi
 chmod 0400 "$BACKUP_DIR/$(whoami)-ownertrust-gpg.txt"
 
 log "Exporting Public Key"
-if ! $GPG --export --armor $EMAIL > "$BACKUP_DIR/$EMAIL-public-gpg.key"; then
+if ! $GPG --export --armor "$EMAIL" > "${BACKUP_DIR}/${EMAIL}-public-gpg.key"; then
   err "Failed to Export Public Key"
   exit 1
 fi
 chmod 0400 "$BACKUP_DIR/$EMAIL-public-gpg.key"
 
 log "Exporting Secret Key"
-if ! $GPG --export-secret-keys --armor $EMAIL > "$BACKUP_DIR/$EMAIL-secret-gpg.key"; then
+if ! $GPG --export-secret-keys --armor "$EMAIL" > "${BACKUP_DIR}/${EMAIL}-secret-gpg.key"; then
   err "Failed to Export Secret Key"
   exit 1
 fi
-chmod 0400 "$BACKUP_DIR/$EMAIL-secret-gpg.key"
+chmod 0400 "${BACKUP_DIR}/${EMAIL}-secret-gpg.key"
 
 # Compress and Remove Backup Dir
 log "Compress ${BACKUP_DIR} and remove ${BACKUP_DIR}"
-if ! tar -czf gpg_backup.tar.gz $BACKUP_DIR; then
+if ! tar -czf gpg_backup.tar.gz "$BACKUP_DIR"; then
   err "Failed to Compress ${BACKUP_DIR}"
   exit 1
 fi
-rm -rf $BACKUP_DIR
+rm -rf "$BACKUP_DIR"
