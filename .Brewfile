@@ -37,6 +37,7 @@ cask 'font-hack'
 # Packages
 brew 'bash-completion'
 brew 'chruby'
+brew 'diff-so-fancy'
 brew 'fping'
 brew 'git'
 brew 'gnupg'
