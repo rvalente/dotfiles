@@ -13,7 +13,7 @@ esac
 
 ## Environment Variables -----------------------------------------------------
 
-export PATH="/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin"
+export PATH="/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/Library/TeX/texbin/"
 
 export EDITOR=vim
 export VISUAL=$EDITOR
