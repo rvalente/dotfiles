@@ -25,5 +25,8 @@
 (electric-pair-mode 1)
 (exec-path-from-shell-initialize)
 (global-flycheck-mode)
+(setq ring-bell-function 'ignore)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
 (provide 'init)
 ;;; init.el ends here
