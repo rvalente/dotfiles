@@ -35,6 +35,7 @@ cask 'wireshark'
 cask 'font-hack'
 
 # Packages
+brew 'aspell'
 brew 'bash-completion'
 brew 'chruby'
 brew 'diff-so-fancy'
