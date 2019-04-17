@@ -33,6 +33,7 @@ cask 'wireshark'
 
 # Fonts
 cask 'font-hack'
+cask 'font-awesome'
 
 # Packages
 brew 'aspell'
@@ -54,6 +55,7 @@ brew 'kubernetes-helm'
 brew 'kubernetes-cli'
 brew 'nmap'
 brew 'packer'
+brew 'pandoc'
 brew 'pinentry-mac'
 brew 'pv'
 brew 'reattach-to-user-namespace'

@@ -114,3 +114,6 @@ PROMPT_COMMAND='__git_ps1 "[\e[34m\u\e[39m@\e[33m\h\e[39m][\e[34m\W\e[39m]" "\n\
 # Ruby / Chruby
 source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
+
+# check if ruby 2.6.2 and source
+[ -d ~/.rubies/ruby-2.6.2 ] && chruby ruby-2.6.2
