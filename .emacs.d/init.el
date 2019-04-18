@@ -96,8 +96,9 @@
 
 ;;; org-mode settings
 (setq org-log-done t
-      org-todo-keywords '((sequence "TODO" "INPROGRESS" "DONE"))
-      org-todo-keyword-faces '(("INPROGRESS" . (:foreground "blue" :weight bold))))
+      org-todo-keywords '((sequence "TODO" "INPROGRESS" "BLOCKED" "DONE"))
+      org-todo-keyword-faces '(("INPROGRESS" . (:foreground "blue" :weight bold))
+			       ("BLOCKED" . (:foreground "red" :weight bold))))
 (add-hook 'org-mode-hook
           (lambda ()
             (flyspell-mode)))
