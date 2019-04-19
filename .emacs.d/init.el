@@ -39,6 +39,10 @@
 (use-package yaml-mode)
 (use-package writegood-mode)
 
+(use-package terraform-mode
+  :init
+  (add-hook 'terraform-mode-hook #'terraform-format-on-save-mode))
+
 ;; markdown mode with support for markdownlint via flycheck
 (use-package markdown-mode
   :commands (markdown-mode gfm-mode)
