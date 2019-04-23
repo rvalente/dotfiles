@@ -3,7 +3,7 @@
 ;; Copyright 2019 Ronald Valente
 
 ;; Author: Ronald Valente
-;; Version: 0.0.1
+;; Version: 0.1.0
 ;; Created: 2019-04-04
 
 ;;; Commentary:
@@ -100,9 +100,18 @@
 
 ;;; org-mode settings
 (setq org-log-done t
-      org-todo-keywords '((sequence "TODO" "INPROGRESS" "BLOCKED" "DONE"))
-      org-todo-keyword-faces '(("INPROGRESS" . (:foreground "blue" :weight bold))
+      org-enforce-todo-dependencies t
+      org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "WAITING" "|" "DONE" "CANCELED"))
+      org-todo-keyword-faces '(("IN-PROGRESS" . (:foreground "blue" :weight bold))
 			       ("BLOCKED" . (:foreground "red" :weight bold))))
+
+(setq org-agenda-files
+      (file-expand-wildcards "~/org/*.org"))
+
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+
+
 (add-hook 'org-mode-hook
           (lambda ()
             (flyspell-mode)))
