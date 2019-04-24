@@ -105,12 +105,10 @@
       org-todo-keyword-faces '(("IN-PROGRESS" . (:foreground "blue" :weight bold))
 			       ("BLOCKED" . (:foreground "red" :weight bold))))
 
-(setq org-agenda-files
-      (file-expand-wildcards "~/org/*.org"))
+(setq org-agenda-files '("~/org"))
 
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
-
 
 (add-hook 'org-mode-hook
           (lambda ()
