@@ -86,10 +86,6 @@ shopt -s dirspell 2> /dev/null
 # Correct spelling errors in arguments supplied to cd
 shopt -s cdspell 2> /dev/null
 
-# This defines where cd looks for targets
-# Add the directories you want to have fast access to, separated by colon
-CDPATH="$HOME/code"
-
 # Complete Hosts
 shopt -s hostcomplete
 
@@ -115,5 +111,5 @@ PROMPT_COMMAND='__git_ps1 "[\e[34m\u\e[39m@\e[33m\h\e[39m][\e[34m\W\e[39m]" "\n\
 source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
 
-# check if ruby 2.6.2 and source
-[ -d ~/.rubies/ruby-2.6.2 ] && chruby ruby-2.6.2
+# check if ruby 2.6.3 and source
+[ -d ~/.rubies/ruby-2.6.3 ] && chruby ruby-2.6.3
