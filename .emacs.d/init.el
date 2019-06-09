@@ -164,7 +164,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (exec-path-from-shell flycheck forge magit base16-theme elpy htmlize json-mode markdown-mode writegood-mode yaml-mode use-package-ensure-system-package use-package))))
+    (haskell-mode exec-path-from-shell flycheck forge magit base16-theme elpy htmlize json-mode markdown-mode writegood-mode yaml-mode use-package-ensure-system-package use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
