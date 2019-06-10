@@ -15,7 +15,7 @@ esac
 
 export PATH="/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/Library/TeX/texbin/"
 
-export EDITOR=vim
+export EDITOR='emacsclient -c'
 export VISUAL=$EDITOR
 export PAGER='less -m'
 

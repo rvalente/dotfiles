@@ -20,3 +20,6 @@ alias gcm='git commit -m'
 # macOS Specific Aliases
 alias brewu="brew update && brew upgrade && brew doctor && brew cleanup"
 alias flushdns='sudo killall -HUP mDNSResponder; sudo killall mDNSResponderHelper; sudo dscacheutil -flushcache'
+
+# emacs aliases
+alias e='emacsclient -c'

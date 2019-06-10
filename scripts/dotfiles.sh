@@ -45,3 +45,13 @@ fi
 # Install User Packages
 echo "Install Packages from ${BREWFILE}..."
 brew bundle --file="$BREWFILE"
+
+# Install Plist to LaunchAgents
+if [ ! -f ~/Library/LaunchAgents/gnu.emacs.daemon.plist ]; then
+    cp gnu.emacs.daemon.plist ~/Library/LaunchAgents/gnu.emacs.daemon.plist
+fi
+
+# Enable Emacs Daemon
+if [ -f ~/Library/LaunchAgents/gnu.emacs.daemon.plist ]; then
+    launchctl load -w ~/Library/LaunchAgents/gnu.emacs.daemon.plist
+fi
