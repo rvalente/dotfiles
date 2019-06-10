@@ -2,6 +2,7 @@
 	preloadindex = true
 	excludesfile = ~/.gitignore
 	pager = diff-so-fancy | less --tabs=4 -RFX
+	whitespace = trailing-space,space-before-tab,indent-with-non-tab
 [color]
 	ui = true
 	branch = auto
