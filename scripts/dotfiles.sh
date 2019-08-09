@@ -30,9 +30,6 @@ brew analytics off
 # Update Homebrew recipes
 brew update
 
-# Install Mac App Store CLI
-brew install mas
-
 # Install all our dependencies with bundle (See Brewfile)
 brew tap homebrew/bundle
 
@@ -55,3 +52,9 @@ fi
 if [ -f ~/Library/LaunchAgents/gnu.emacs.daemon.plist ]; then
     launchctl load -w ~/Library/LaunchAgents/gnu.emacs.daemon.plist
 fi
+
+# Setup GPG Agent
+echo "Add this to ~/.gnupg/gpg-agent.conf"
+echo "pinentry-program /usr/local/bin/pinentry-mac"
+echo "Add this to ~/.gnupg/gpg.conf"
+echo "keyserver hkps://hkps.pool.sks-keyservers.net"
