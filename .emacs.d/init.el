@@ -16,7 +16,8 @@
 ;; configure package repository
 (require 'package)
 (setq package-enable-at-startup nil)
-(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
 ;; install use-package if we dont have it
@@ -38,6 +39,14 @@
 
 (use-package yaml-mode)
 (use-package writegood-mode)
+(use-package go-mode
+  :init
+  (add-hook 'before-save-hook 'gofmt-before-save)
+  (setq gofmt-command "goimports"))
+(use-package company-mode
+  :init
+  (add-hook 'after-init-hook 'global-company-mode))
+(use-package company-go)
 
 (use-package terraform-mode
   :init
@@ -65,7 +74,8 @@
 
 ;; use flycheck globally
 (use-package flycheck
-	     :init (global-flycheck-mode))
+  :ensure t
+  :init (global-flycheck-mode))
 
 ;; we need support for $PATH
 (use-package exec-path-from-shell
@@ -164,7 +174,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (godoctor exec-path-from-shell flycheck forge magit base16-theme elpy htmlize json-mode markdown-mode writegood-mode yaml-mode use-package-ensure-system-package use-package))))
+    (## go-mode godoctor exec-path-from-shell flycheck forge magit base16-theme elpy htmlize json-mode markdown-mode writegood-mode yaml-mode use-package-ensure-system-package use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -4,6 +4,7 @@
 	pager = diff-so-fancy | less --tabs=4 -RFX
 	whitespace = trailing-space,space-before-tab,indent-with-non-tab
 	autocrlf = input
+	editor = vim
 [color]
 	ui = true
 	branch = auto
@@ -15,12 +16,11 @@
 	newNormal    = green bold
 	newHighlight = green bold 22
 [color "diff"]
-	commit     = green
-	meta       = yellow
-	frag       = cyan
-	old        = red
-	new        = green
-	whitespace = red reverse
+	commit     = yellow bold
+	meta       = 11
+	frag       = magenta bold
+	old        = red bold
+	new        = green bold
 [diff]
 	tool      = vimdiff
 	algorithm = histogram
