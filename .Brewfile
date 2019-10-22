@@ -6,10 +6,8 @@ tap 'homebrew/cask-drivers'
 # Cask
 cask 'appcleaner'
 cask 'emacs'
-cask 'iterm2'
 cask 'qlmarkdown'
 cask 'quicklook-json'
-cask 'quicklook-csv'
 
 # Fonts
 cask 'font-hack'

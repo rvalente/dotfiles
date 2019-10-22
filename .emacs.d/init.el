@@ -40,16 +40,13 @@
 (use-package yaml-mode)
 (use-package writegood-mode)
 (use-package go-mode
-  :init
+  :config
   (add-hook 'before-save-hook 'gofmt-before-save)
+  (add-to-list 'exec-path "~/code/go/bin")
   (setq gofmt-command "goimports"))
-(use-package company-mode
-  :init
-  (add-hook 'after-init-hook 'global-company-mode))
-(use-package company-go)
 
 (use-package terraform-mode
-  :init
+  :config
   (add-hook 'terraform-mode-hook #'terraform-format-on-save-mode))
 
 ;; markdown mode with support for markdownlint via flycheck
@@ -65,12 +62,12 @@
 (use-package htmlize)
 (use-package elpy)
 (use-package base16-theme
-  :init (load-theme 'base16-tomorrow-night t))
+  :config (load-theme 'base16-tomorrow-night t))
 
 ;; setup magit and forge
 (use-package magit)
 (use-package forge
-	     :after magit)
+  :after magit)
 
 ;; use flycheck globally
 (use-package flycheck
@@ -79,9 +76,24 @@
 
 ;; we need support for $PATH
 (use-package exec-path-from-shell
-	     :if (memq window-system '(mac ns x))
-	     :config
-	     (exec-path-from-shell-initialize))
+  :if (memq window-system '(mac ns x))
+  :config
+  (exec-path-from-shell-initialize))
+
+(use-package company
+  :ensure t
+  :pin melpa)
+(use-package company-go)
+(use-package company-shell)
+
+(setq company-tooltip-limit 20)                      ; bigger popup window
+(setq company-idle-delay .3)                         ; decrease delay before autocompletion popup shows
+(setq company-echo-delay 0)                          ; remove annoying blinking
+(setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
+
+(add-hook 'go-mode-hook (lambda ()
+			  (set (make-local-variable 'company-backends) '(company-go))
+			  (company-mode)))
 
 (setq inhibit-startup-message t)      ;; hide the startup message
 (global-linum-mode t)                 ;; enable line numbers globally
@@ -105,8 +117,26 @@
 ;; Never Save Trailing Whitespace
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+;; Enable Autocompletion on Startup
+(add-hook 'after-init-hook 'global-company-mode)
+
 ;; Require new line at the end of every file
 (setq require-final-newline t)
+
+;; Ensure our PATH is Correct
+(defun set-exec-path-from-shell-PATH ()
+  (let ((path-from-shell (replace-regexp-in-string
+                          "[ \t\n]*$"
+                          ""
+                          (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
+    (setenv "PATH" path-from-shell)
+    (setq eshell-path-env path-from-shell) ; for eshell users
+    (setq exec-path (split-string path-from-shell path-separator))))
+
+(when window-system (set-exec-path-from-shell-PATH))
+
+;; Set our GOPATH
+(setenv "GOPATH" "~/code/go")
 
 ;;; org-mode settings
 (setq org-log-done t
@@ -132,9 +162,6 @@
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((shell . t)
-   (ruby . t)
-   (python . t)
-   (java . t)
    (groovy . t)
    (sql . t)
    (org . t)

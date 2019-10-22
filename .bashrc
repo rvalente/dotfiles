@@ -14,8 +14,7 @@ esac
 ## Environment Variables -----------------------------------------------------
 
 export PATH="/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/Library/TeX/texbin/"
-
-export EDITOR='emacsclient -c'
+export EDITOR='vim'
 export VISUAL=$EDITOR
 export PAGER='less -m'
 
@@ -106,10 +105,3 @@ GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWSTASHSTATE=1
 GIT_PS1_SHOWUNTRACKEDFILES=1
 PROMPT_COMMAND='__git_ps1 "[\e[34m\u\e[39m@\e[33m\h\e[39m][\e[34m\W\e[39m]" "\n\\\$ "'
-
-# Ruby / Chruby
-source /usr/local/share/chruby/chruby.sh
-source /usr/local/share/chruby/auto.sh
-
-# check if ruby 2.6.3 and source
-[ -d ~/.rubies/ruby-2.6.3 ] && chruby ruby-2.6.3
