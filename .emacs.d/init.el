@@ -3,7 +3,7 @@
 ;; Copyright 2019 Ronald Valente
 
 ;; Author: Ronald Valente
-;; Version: 0.1.0
+;; Version: 1.1.0
 ;; Created: 2019-04-04
 
 ;;; Commentary:
@@ -13,183 +13,113 @@
 
 ;;; Code:
 
+;; Minimal UI
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
+(tooltip-mode -1)
+(menu-bar-mode -1)
+(save-place-mode 1)                           ;; return to the last place we were in the file
+(show-paren-mode t)                           ;; show matching parens
+(delete-selection-mode t)                     ;; delete the selection with a keypress like every other editor
+(blink-cursor-mode -1)                        ;; the blinking cursor is nothing, but an annoyance
+
+(setq inhibit-startup-message t)              ;; hide the startup message
+(setq make-backup-files nil)                  ;; dont make backup files
+(setq column-number-mode t)                   ;; display the column and line number
+
+;; Make emacs more performant
+(setq gc-cons-threshold 50000000)             ;; run gc every 50mb instead of 0.7mb
+(setq large-file-warning-threshold 100000000) ;; warn when opening files larger than 100MB
+
+;; Disable annoyinb bell and startup screen
+(setq ring-bell-function 'ignore)             ;; disable the annoying bell
+(setq inhibit-startup-screen t)               ;; disable startup screen
+
+;; nice scrolling
+(setq scroll-margin 0
+      scroll-conservatively 100000
+      scroll-preserve-screen-position 1)
+
+;; mode line settings
+(global-linum-mode t) ;; enable line numbers globally
+(line-number-mode t)
+(column-number-mode t)
+(size-indication-mode t)
+
+;; enable y/n answers
+(fset 'yes-or-no-p 'y-or-n-p)
+
+;; more useful frame title
+(setq frame-title-format
+      '((:eval (if (buffer-file-name)
+		   (abbreviate-file-name (buffer-file-name))
+		 "%b"))))
+
+(setq-default indent-tabs-mode nil)   ;; don't use tabs to indent
+(setq-default tab-width 8)            ;; but maintain correct appearance
+(setq require-final-newline t)        ;; Newline at the end of the file, always
+
+;; revert buffers automatically when underlying files are changed externally
+(global-auto-revert-mode t)
+
+;; Ensure we're using UTF-8 always
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+
 ;; configure package repository
 (require 'package)
 (setq package-enable-at-startup nil)
-(add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/"))
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(setq package-archives '(("org" . "http://orgmode.org/elpa/")
+			 ("gnu" . "http://elpa.gnu.org/packages/")
+			 ("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
 
 ;; install use-package if we dont have it
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
+(require 'use-package)
 
-;; enable use-package for auto installation
-(eval-when-compile
-  (require 'use-package))
-
-;; enable use-package auto-install globally
-(require 'use-package-ensure)
-(setq use-package-always-ensure t)
-
-;; ensure we have system packages as well
-(use-package use-package-ensure-system-package
-  :ensure t)
-
-(use-package yaml-mode)
-(use-package writegood-mode)
-(use-package go-mode
+;; Evil mode
+(use-package evil
+  :ensure t
   :config
-  (add-hook 'before-save-hook 'gofmt-before-save)
-  (add-to-list 'exec-path "~/code/go/bin")
-  (setq gofmt-command "goimports"))
+  (evil-mode 1))
 
-(use-package terraform-mode
+;; Enable magit
+(use-package magit
+  :ensure t
+  :bind (("C-x g" . magit-status)))
+
+(use-package paren
   :config
-  (add-hook 'terraform-mode-hook #'terraform-format-on-save-mode))
+  (show-paren-mode +1))
 
-;; markdown mode with support for markdownlint via flycheck
-(use-package markdown-mode
-  :commands (markdown-mode gfm-mode)
-  :mode (("README\\.md\\'" . gfm-mode)
-         ("\\.md\\'" . markdown-mode)
-         ("\\.md.html\\'" . markdown-mode)
-         ("\\.markdown\\'" . markdown-mode))
-  :init (setq markdown-command "multimarkdown"))
+(use-package elec-pair
+  :config
+  (electric-pair-mode +1))
 
-(use-package json-mode)
-(use-package htmlize)
-(use-package elpy)
-(use-package base16-theme
-  :config (load-theme 'base16-tomorrow-night t))
+(use-package hl-line
+  :config
+  (global-hl-line-mode +1))
 
-;; setup magit and forge
-(use-package magit)
 (use-package forge
+  :ensure t
   :after magit)
 
-;; use flycheck globally
-(use-package flycheck
+;; Proper Theme
+(use-package doom-themes
   :ensure t
-  :init (global-flycheck-mode))
-
-;; we need support for $PATH
-(use-package exec-path-from-shell
-  :if (memq window-system '(mac ns x))
   :config
-  (exec-path-from-shell-initialize))
+  (load-theme 'doom-one t))
 
-(use-package company
-  :ensure t
-  :pin melpa)
-(use-package company-go)
-(use-package company-shell)
-
-(setq company-tooltip-limit 20)                      ; bigger popup window
-(setq company-idle-delay .3)                         ; decrease delay before autocompletion popup shows
-(setq company-echo-delay 0)                          ; remove annoying blinking
-(setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
-
-(add-hook 'go-mode-hook (lambda ()
-			  (set (make-local-variable 'company-backends) '(company-go))
-			  (company-mode)))
-
-(setq inhibit-startup-message t)      ;; hide the startup message
-(global-linum-mode t)                 ;; enable line numbers globally
-(electric-pair-mode 1)                ;; enable minor mode to insert matching delimiters
-(global-auto-revert-mode t)           ;; auto-refresh with changes on disk
-(setq ring-bell-function 'ignore)     ;; disable bell
-(tool-bar-mode -1)                    ;; disable tool bar
-(scroll-bar-mode -1)                  ;; disable scroll bar
-(menu-bar-mode -1)                    ;; disable menu bar
-(save-place-mode 1)                   ;; return to the last place we were in the file
-(show-paren-mode t)                   ;; show matching parens
-(setq make-backup-files nil)          ;; dont make backup files
-(setq tab-width 2                     ;; tabs should be 2 spaces
-      indent-tabs-mode nil)           ;; disable tabs
-(setq column-number-mode t)           ;; display the column and line number
-
-;; Scratch by Default, Enable org-mode
-(setq initial-scratch-message nil
-      initial-major-mode 'org-mode)
-
-;; Never Save Trailing Whitespace
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-;; Enable Autocompletion on Startup
-(add-hook 'after-init-hook 'global-company-mode)
-
-;; Require new line at the end of every file
-(setq require-final-newline t)
-
-;; Ensure our PATH is Correct
-(defun set-exec-path-from-shell-PATH ()
-  (let ((path-from-shell (replace-regexp-in-string
-                          "[ \t\n]*$"
-                          ""
-                          (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
-    (setenv "PATH" path-from-shell)
-    (setq eshell-path-env path-from-shell) ; for eshell users
-    (setq exec-path (split-string path-from-shell path-separator))))
-
-(when window-system (set-exec-path-from-shell-PATH))
-
-;; Set our GOPATH
-(setenv "GOPATH" "~/code/go")
-
-;;; org-mode settings
-(setq org-log-done t
-      org-enforce-todo-dependencies t
-      org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "WAITING" "|" "DONE" "CANCELED"))
-      org-todo-keyword-faces '(("IN-PROGRESS" . (:foreground "blue" :weight bold))
-			       ("BLOCKED" . (:foreground "red" :weight bold))))
-
-(setq org-agenda-files '("~/org"))
-
-(define-key global-map "\C-cl" 'org-store-link)
-(define-key global-map "\C-ca" 'org-agenda)
-
-(add-hook 'org-mode-hook
-          (lambda ()
-            (flyspell-mode)))
-(add-hook 'org-mode-hook
-          (lambda ()
-            (writegood-mode)))
-
-;;; Enable org-babel languages
-(require 'ob)
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((shell . t)
-   (groovy . t)
-   (sql . t)
-   (org . t)
-   (C . t)))
-
-;;; Enable Ido Everywhere
-(setq confirm-nonexistent-file-or-buffer nil)
-(setq ido-create-new-buffer 'always)
-(setq ido-enable-flex-matching t)
-(setq ido-everywhere t)
-(ido-mode 1)
-
-;;; flyspell
-(setq flyspell-issue-welcome-flag nil)
-(if (eq system-type 'darwin)
-    (setq-default ispell-program-name "/usr/local/bin/aspell")
-  (setq-default ispell-program-name "/usr/bin/aspell"))
-(setq-default ispell-list-command "list")
-
-;;; conf-mode
-(add-to-list 'auto-mode-alist '("\\.gitconfig$" . conf-mode))
-
-;;; Yaml
-(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
-(add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
-
-;;; Markdown
-(add-hook 'markdown-mode-hook 'writegood-mode)
+;; Fancy titlebar for macOS
+(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+(add-to-list 'default-frame-alist '(ns-appearance . darl))
+(setq ns-use-proxy-icon nil)
+(setq frame-title-format nil)
 
 (provide 'init)
 
@@ -201,7 +131,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (## go-mode godoctor exec-path-from-shell flycheck forge magit base16-theme elpy htmlize json-mode markdown-mode writegood-mode yaml-mode use-package-ensure-system-package use-package))))
+    (doom-themes doom-theme evil yaml-mode writegood-mode use-package-ensure-system-package terraform-mode json-mode htmlize forge flycheck exec-path-from-shell elpy dired-sidebar company-shell company-go base16-theme all-the-icons))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

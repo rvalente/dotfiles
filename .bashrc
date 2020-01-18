@@ -13,7 +13,13 @@ esac
 
 ## Environment Variables -----------------------------------------------------
 
-export PATH="/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/Library/TeX/texbin/"
+# Set GOPATH if go is installed
+if hash go 2>/dev/null; then
+    GOPATH=$(go env GOPATH)
+    export GOPATH
+fi
+
+export PATH="${GOPATH}/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin"
 export EDITOR='vim'
 export VISUAL=$EDITOR
 export PAGER='less -m'
@@ -25,16 +31,8 @@ export TERM=xterm-256color
 export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='1;32'
 export CLICOLOR=1
-
-# BSD ls Support
 export LSCOLORS="ExFxBxDxCxegedabagacad"
-
-# GNU ls Support
 export LS_COLORS="di=1;34:ln=1;35:so=1;31:pi=1;33:ex=1;32:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"
-
-# Golang Support
-export GOPATH=~/code/go
-export PATH=$PATH:$GOPATH/bin
 
 # Prevent file overwrite on stdout redirection
 # Use `>|` to force redirection to an existing file
@@ -98,10 +96,10 @@ ulimit -c 0
 [ -r ~/.bash_aliases ] && source ~/.bash_aliases
 
 # Prompt ---------------------------------------------------------------------
-# Leverage the Built In Git Functionality
-# /usr/local/etc/bash_completion.d/git-prompt.sh
-GIT_PS1_SHOWCOLORHINTS=1
-GIT_PS1_SHOWDIRTYSTATE=1
-GIT_PS1_SHOWSTASHSTATE=1
-GIT_PS1_SHOWUNTRACKEDFILES=1
+
+export GIT_PS1_SHOWCOLORHINTS=1
+export GIT_PS1_SHOWDIRTYSTATE=1
+export GIT_PS1_SHOWSTASHSTATE=1
+export GIT_PS1_SHOWUNTRACKEDFILES=1
+
 PROMPT_COMMAND='__git_ps1 "[\e[34m\u\e[39m@\e[33m\h\e[39m][\e[34m\W\e[39m]" "\n\\\$ "'
