@@ -115,6 +115,17 @@
   :config
   (load-theme 'doom-one t))
 
+;; Enable a sidebar for navigation
+(use-package dired-sidebar
+  :ensure t
+  :bind (("C-x C-n" . dired-sidebar-toggle-sidebar))
+  :commands (dired-sidebar-toggle-sidebar))
+
+(use-package all-the-icons-dired
+  :ensure t
+  :config
+  (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
+
 ;; Fancy titlebar for macOS
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 (add-to-list 'default-frame-alist '(ns-appearance . darl))
@@ -131,7 +142,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (doom-themes doom-theme evil yaml-mode writegood-mode use-package-ensure-system-package terraform-mode json-mode htmlize forge flycheck exec-path-from-shell elpy dired-sidebar company-shell company-go base16-theme all-the-icons))))
+    (all-the-icons-dired doom-themes doom-theme evil yaml-mode writegood-mode use-package-ensure-system-package terraform-mode json-mode htmlize forge flycheck exec-path-from-shell elpy dired-sidebar company-shell company-go base16-theme all-the-icons))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
