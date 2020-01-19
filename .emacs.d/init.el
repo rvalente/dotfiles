@@ -88,11 +88,6 @@
   :config
   (evil-mode 1))
 
-;; Enable magit
-(use-package magit
-  :ensure t
-  :bind (("C-x g" . magit-status)))
-
 (use-package paren
   :config
   (show-paren-mode +1))
@@ -105,6 +100,20 @@
   :config
   (global-hl-line-mode +1))
 
+;; Better integration with macOS shell
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)
+    (exec-path-from-shell-copy-env "GOPATH")))
+
+;; Enable magit
+(use-package magit
+  :ensure t
+  :bind (("C-x g" . magit-status)))
+
+;; Support Extra Github Functions
 (use-package forge
   :ensure t
   :after magit)
@@ -113,7 +122,8 @@
 (use-package doom-themes
   :ensure t
   :config
-  (load-theme 'doom-one t))
+  (load-theme 'doom-nord-light t)
+  (doom-themes-org-config))
 
 ;; Enable a sidebar for navigation
 (use-package dired-sidebar
@@ -121,10 +131,58 @@
   :bind (("C-x C-n" . dired-sidebar-toggle-sidebar))
   :commands (dired-sidebar-toggle-sidebar))
 
+;; Enable icons with dired-sidebar
 (use-package all-the-icons-dired
   :ensure t
   :config
   (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
+
+;; Enable language server protocol support
+(use-package lsp-mode
+  :ensure t
+  :commands (lsp lsp-deferred)
+  :hook (go-mode . lsp-deferred))
+
+;; Set up before-save hooks to format buffer and add/delete imports.
+;; Make sure you don't have other gofmt/goimports hooks enabled.
+(defun lsp-go-install-save-hooks ()
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+
+;; Optional - provides fancier overlays.
+(use-package lsp-ui
+  :ensure t
+  :commands lsp-ui-mode
+  :hook (lsp-mode-hook . lsp-ui-mode))
+
+;; Company mode is a standard completion package that works well with lsp-mode.
+(use-package company
+  :ensure t
+  :config
+  (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 1))
+
+;; company-lsp integrates company mode completion with lsp-mode.
+;; completion-at-point also works out of the box but doesn't support snippets.
+(use-package company-lsp
+  :ensure t
+  :after company
+  :commands company-lsp
+  :config
+  (push 'company-lsp company-backends))
+
+;; Enable Golang Support
+(use-package go-mode
+  :ensure t
+  :config
+  (add-hook 'go-mode-hook 'lsp-deferred)
+  (add-hook 'go-mode-gook 'flycheck-mode))
+  
+;; Enable syntax checking
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
 
 ;; Fancy titlebar for macOS
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
@@ -142,7 +200,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (all-the-icons-dired doom-themes doom-theme evil yaml-mode writegood-mode use-package-ensure-system-package terraform-mode json-mode htmlize forge flycheck exec-path-from-shell elpy dired-sidebar company-shell company-go base16-theme all-the-icons))))
+    (lsp-mode all-the-icons-dired doom-themes doom-theme evil yaml-mode writegood-mode use-package-ensure-system-package terraform-mode json-mode htmlize forge flycheck exec-path-from-shell elpy dired-sidebar company-shell company-go base16-theme all-the-icons))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

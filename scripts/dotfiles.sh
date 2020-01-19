@@ -58,3 +58,6 @@ echo "Add this to ~/.gnupg/gpg-agent.conf"
 echo "pinentry-program /usr/local/bin/pinentry-mac"
 echo "Add this to ~/.gnupg/gpg.conf"
 echo "keyserver hkps://hkps.pool.sks-keyservers.net"
+
+# Install and Update Go Packages
+bash ~/scripts/gopkgs.sh
