@@ -125,10 +125,18 @@
   (load-theme 'doom-nord-light t)
   (doom-themes-org-config))
 
+;; optional, provides snippets for method signature completion
+(use-package yasnippet
+  :ensure t
+  :commands yas-minor-mode
+  :hook (go-mode . yas-minor-mode))
+
 ;; Enable language server protocol support
 (use-package lsp-mode
   :ensure t
   :commands (lsp lsp-deferred)
+  :config
+  (setq lsp-prefer-flymake nil)
   :hook (go-mode . lsp-deferred))
 
 ;; Set up before-save hooks to format buffer and add/delete imports.
@@ -142,14 +150,26 @@
 (use-package lsp-ui
   :ensure t
   :commands lsp-ui-mode
-  :hook (lsp-mode-hook . lsp-ui-mode))
+  :hook (lsp-mode-hook . lsp-ui-mode)
+  :config
+  (setq lsp-ui-doc-enable nil
+        lsp-ui-peek-enable t
+        lsp-ui-sideline-enable t
+        lsp-ui-imenu-enable t
+        lsp-ui-flycheck-enable t)
+  :init)
 
 ;; Company mode is a standard completion package that works well with lsp-mode.
 (use-package company
   :ensure t
   :config
   (setq company-idle-delay 0)
-  (setq company-minimum-prefix-length 1))
+  (setq company-minimum-prefix-length 1)
+  (setq company-tooltop-align-annotations t))
+
+;; optional package to get the error squiggles as you edit
+(use-package flycheck
+  :ensure t)
 
 ;; company-lsp integrates company mode completion with lsp-mode.
 ;; completion-at-point also works out of the box but doesn't support snippets.
@@ -163,8 +183,15 @@
 ;; Enable Golang Support
 (use-package go-mode
   :ensure t
-  :config
-  (add-hook 'go-mode-hook 'lsp-deferred))
+  :bind (
+         ;; If you want to switch existing go-mode bindings to use lsp-mode/gopls instead
+         ;; uncomment the following lines
+         ;; ("C-c C-j" . lsp-find-definition)
+         ;; ("C-c C-d" . lsp-describe-thing-at-point)
+         )
+  :hook ((go-mode . lsp-deferred)
+         (before-save . lsp-format-buffer)
+         (before-save . lsp-organize-imports)))
   
 ;; Fancy titlebar for macOS
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
