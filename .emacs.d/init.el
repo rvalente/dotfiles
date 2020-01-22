@@ -159,6 +159,15 @@
         lsp-ui-flycheck-enable t)
   :init)
 
+(use-package web-mode
+  :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.gohtml\\'" . web-mode))
+  (setq web-mode-engines-alist
+        '(("go" . "\\.gohtml\\'"))
+        )
+  )
+
 ;; Company mode is a standard completion package that works well with lsp-mode.
 (use-package company
   :ensure t
@@ -207,9 +216,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (lsp-mode doom-themes evil exec-path-from-shell ))))
+ '(package-selected-packages (quote (lsp-mode doom-themes evil exec-path-from-shell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
