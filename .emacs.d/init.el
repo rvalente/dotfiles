@@ -199,8 +199,11 @@
          ;; ("C-c C-d" . lsp-describe-thing-at-point)
          )
   :hook ((go-mode . lsp-deferred)
-         (before-save . lsp-format-buffer)
-         (before-save . lsp-organize-imports)))
+	 (before-save . lsp-format-buffer)
+	 (before-save . lsp-organize-imports)))
+
+(use-package sql-indent
+  :ensure t)
 
 ;; Fancy titlebar for macOS
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
@@ -216,6 +219,8 @@
 
 (setq org-directory "~/org")
 (setq org-default-notes-file "~/org/todo.org")
+(setq org-log-done 'note)
+(setq org-log-done 'time)
 
 ;; Setup C-c c to capture new TODOs
 (global-set-key (kbd "C-c c") 'org-capture)
@@ -273,7 +278,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (lsp-mode doom-themes evil exec-path-from-shell))))
+ '(package-selected-packages
+   (quote
+    (salt-mode ansible yaml-mode groovy-mode sql-indent lsp-mode doom-themes evil exec-path-from-shell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
