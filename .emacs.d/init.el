@@ -52,8 +52,8 @@
 ;; more useful frame title
 (setq frame-title-format
       '((:eval (if (buffer-file-name)
-		   (abbreviate-file-name (buffer-file-name))
-		 "%b"))))
+                   (abbreviate-file-name (buffer-file-name))
+                 "%b"))))
 
 (setq-default indent-tabs-mode nil)   ;; don't use tabs to indent
 (setq-default tab-width 8)            ;; but maintain correct appearance
@@ -72,8 +72,8 @@
 (require 'package)
 (setq package-enable-at-startup nil)
 (setq package-archives '(("org" . "http://orgmode.org/elpa/")
-			 ("gnu" . "http://elpa.gnu.org/packages/")
-			 ("melpa" . "https://melpa.org/packages/")))
+                         ("gnu" . "http://elpa.gnu.org/packages/")
+                         ("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
 
 ;; install use-package if we dont have it
@@ -201,12 +201,69 @@
   :hook ((go-mode . lsp-deferred)
          (before-save . lsp-format-buffer)
          (before-save . lsp-organize-imports)))
-  
+
 ;; Fancy titlebar for macOS
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 (add-to-list 'default-frame-alist '(ns-appearance . darl))
 (setq ns-use-proxy-icon nil)
 (setq frame-title-format nil)
+
+;; Setup Org Mode
+(use-package org
+  :ensure t
+  :bind (
+         ("C-c a" . org-agenda)))
+
+(setq org-directory "~/org")
+(setq org-default-notes-file "~/org/todo.org")
+
+;; Setup C-c c to capture new TODOs
+(global-set-key (kbd "C-c c") 'org-capture)
+;; Setup a key bind for the agenda
+(global-set-key (kbd "C-c a") 'org-agenda)
+
+(setq org-agenda-files (quote ("~/org")))
+
+(use-package org-fancy-priorities
+  :ensure t
+  :hook
+  (org-mode . org-fancy-priorities-mode)
+  :config
+  (setq org-fancy-priorities-list '("⚡" "⬆" "⬇" "☕")))
+
+;; A new template
+(setq org-capture-templates
+      '(("t" "Todo" entry (file "~/org/todo.org")
+         "* TODO %?\n%U\n")
+        ("n" "Notes" entry (file+headline "~/org/notes.org" "Notes")
+         "* %? :NOTE:\n%U\n")))
+
+(setq org-todo-keywords
+      (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
+              (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)" "PHONE" "MEETING"))))
+
+(setq org-todo-keyword-faces
+      (quote (("TODO" :foreground "red" :weight bold)
+              ("NEXT" :foreground "blue" :weight bold)
+              ("DONE" :foreground "forest green" :weight bold)
+              ("WAITING" :foreground "orange" :weight bold)
+              ("HOLD" :foreground "magenta" :weight bold)
+              ("CANCELLED" :foreground "forest green" :weight bold)
+              ("MEETING" :foreground "forest green" :weight bold)
+              ("PHONE" :foreground "forest green" :weight bold))))
+
+(setq org-use-fast-todo-selection t)
+(setq org-treat-S-cursor-todo-selection-as-state-change nil)
+
+(setq org-todo-state-tags-triggers
+      (quote (("CANCELLED" ("CANCELLED" . t))
+              ("WAITING" ("WAITING" . t))
+              ("HOLD" ("WAITING") ("HOLD" . t))
+              (done ("WAITING") ("HOLD"))
+              ("TODO" ("WAITING") ("CANCELLED") ("HOLD"))
+              ("NEXT" ("WAITING") ("CANCELLED") ("HOLD"))
+              ("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
+
 
 (provide 'init)
 
