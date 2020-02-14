@@ -88,6 +88,8 @@
   :config
   (evil-mode 1))
 
+(use-package whitespace)
+
 (use-package paren
   :config
   (show-paren-mode +1))
@@ -202,8 +204,8 @@
          ;; ("C-c C-d" . lsp-describe-thing-at-point)
          )
   :hook ((go-mode . lsp-deferred)
-	 (before-save . lsp-format-buffer)
-	 (before-save . lsp-organize-imports)))
+         (before-save . lsp-format-buffer)
+         (before-save . lsp-organize-imports)))
 
 (use-package sql-indent
   :ensure t)
@@ -286,6 +288,10 @@
  '((R . t)
    (mermaid . t)
    (emacs-lisp . nil)))
+
+;; Remove trailling whitespace on save
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+(global-whitespace-mode 1)
 
 (provide 'init)
 
