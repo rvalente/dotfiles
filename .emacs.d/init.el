@@ -125,6 +125,9 @@
   (load-theme 'doom-nord-light t)
   (doom-themes-org-config))
 
+(use-package htmlize
+  :ensure t)
+
 ;; optional, provides snippets for method signature completion
 (use-package yasnippet
   :ensure t
@@ -269,6 +272,20 @@
               ("NEXT" ("WAITING") ("CANCELLED") ("HOLD"))
               ("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
 
+(use-package ob-mermaid
+  :ensure t)
+
+(setq ob-mermaid-cli-path "/usr/local/bin/mmdc")
+
+;; Don't ask for confirmation on eval buffers
+(setq org-confirm-babel-evaluate nil)
+
+;; active Babel languages
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((R . t)
+   (mermaid . t)
+   (emacs-lisp . nil)))
 
 (provide 'init)
 
@@ -280,7 +297,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (salt-mode ansible yaml-mode groovy-mode sql-indent lsp-mode doom-themes evil exec-path-from-shell))))
+    (mermaid-mode htmlize salt-mode ansible yaml-mode groovy-mode sql-indent lsp-mode doom-themes evil exec-path-from-shell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
