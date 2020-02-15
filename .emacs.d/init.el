@@ -291,7 +291,6 @@
 
 ;; Remove trailling whitespace on save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
-(global-whitespace-mode 1)
 
 (provide 'init)
 
