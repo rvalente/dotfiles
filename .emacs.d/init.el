@@ -82,14 +82,6 @@
   (package-install 'use-package))
 (require 'use-package)
 
-;; Evil mode
-(use-package evil
-  :ensure t
-  :config
-  (evil-mode 1))
-
-(use-package whitespace)
-
 (use-package paren
   :config
   (show-paren-mode +1))
