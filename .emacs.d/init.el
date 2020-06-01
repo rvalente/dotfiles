@@ -49,6 +49,9 @@
 ;; enable y/n answers
 (fset 'yes-or-no-p 'y-or-n-p)
 
+(set-face-attribute 'default nil :font "Fira Code Retina-12")
+(set-frame-font "Fira Code Retina-12" nil t)
+
 ;; more useful frame title
 (setq frame-title-format
       '((:eval (if (buffer-file-name)
@@ -112,23 +115,19 @@
   :ensure t
   :after magit)
 
-;; Proper Theme
-(use-package doom-themes
-  :ensure t
-  :config
-  (load-theme 'doom-nord-light t)
-  (doom-themes-org-config))
-
 (use-package htmlize
   :ensure t)
 
-;; optional, provides snippets for method signature completion
-(use-package yasnippet
+(use-package nord-theme
   :ensure t
-  :commands yas-minor-mode
-  :hook (go-mode . yas-minor-mode))
+  :config
+  (load-theme 'nord t))
+
+;; Use `nord8` from Nord's "Frost" palette as background color.
+(setq nord-region-highlight "snowstorm")
 
 ;; Enable language server protocol support
+;; https://github.com/golang/tools/blob/master/gopls/doc/emacs.md
 (use-package lsp-mode
   :ensure t
   :commands (lsp lsp-deferred)
@@ -155,6 +154,12 @@
         lsp-ui-imenu-enable t
         lsp-ui-flycheck-enable t)
   :init)
+
+;; optional, provides snippets for method signature completion
+(use-package yasnippet
+  :ensure t
+  :commands yas-minor-mode
+  :hook (go-mode . yas-minor-mode))
 
 (use-package web-mode
   :ensure t
@@ -213,6 +218,9 @@
   :ensure t
   :bind (
          ("C-c a" . org-agenda)))
+
+(use-package ob-go
+  :ensure t)
 
 (setq org-directory "~/org")
 (setq org-default-notes-file "~/org/todo.org")
@@ -279,6 +287,9 @@
  'org-babel-load-languages
  '((R . t)
    (mermaid . t)
+   (sql . t)
+   (sqlite . t)
+   (go . t)
    (emacs-lisp . nil)))
 
 ;; Remove trailling whitespace on save
@@ -294,7 +305,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (mermaid-mode htmlize salt-mode ansible yaml-mode groovy-mode sql-indent lsp-mode doom-themes evil exec-path-from-shell))))
+    (nord-theme github-theme mermaid-mode htmlize salt-mode ansible yaml-mode groovy-mode sql-indent lsp-mode exec-path-from-shell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
