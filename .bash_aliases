@@ -16,7 +16,7 @@ alias gs='git status -sb'
 alias ga='git add -A'
 alias gcv='git commit -v'
 alias gcm='git commit -m'
+eval "$(hub alias -s)"
 
 # macOS Specific Aliases
-alias brewu="brew update && brew upgrade && brew cleanup"
 alias flushdns='sudo killall -HUP mDNSResponder; sudo killall mDNSResponderHelper; sudo dscacheutil -flushcache'

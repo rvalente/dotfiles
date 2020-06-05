@@ -22,3 +22,5 @@ set expand-tilde on
 "\e[B": history-search-forward
 "\e[C": forward-char
 "\e[D": backward-char
+"\e[1;5C": forward-word
+"\e[1;5D": backward-word
