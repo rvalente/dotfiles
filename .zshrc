@@ -11,6 +11,8 @@ SAVEHIST=10000
 
 fpath+=("$HOME/.zsh/pure")
 
+autoload -Uz compinit && compinit
+
 autoload -U promptinit; promptinit
 prompt pure
 

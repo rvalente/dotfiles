@@ -6,4 +6,5 @@
 export PAGER='less -m'
 export EDITOR='vim'
 export VISUAL=$EDITOR
-export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+export GOPATH=~/go
+export PATH="$GOPATH/bin:/usr/local/bin:/usr/local/sbin:$PATH"
