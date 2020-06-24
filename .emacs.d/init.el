@@ -75,9 +75,6 @@
 ;; Use spaces instead of tabs
 (setq-default indent-tabs-mode nil)
 
-;; Wrap everything at 80 char
-(add-hook 'text-mode-hook '(lambda () (auto-fill-mode 1)))
-
 ;; Enable UTF-8 Everywhere
 (prefer-coding-system 'utf-8-unix)
 (set-default-coding-systems 'utf-8)
