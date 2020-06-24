@@ -75,3 +75,6 @@ zle -N down-line-or-beginning-search
 ## Key Bindings ---------------------------------------------------------------
 bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
+
+source /usr/local/share/chruby/chruby.sh
+source /usr/local/share/chruby/auto.sh
