@@ -44,6 +44,18 @@ cdpath=(
 )
 
 ## Aliases -------------------------------------------------------------------
+# general use
+alias ls='exa'                                                         # ls
+alias l='exa -lbF --git'                                               # list, size, type, git
+alias ll='exa -lbGF --git'                                             # long list
+alias llm='exa -lbGd --git --sort=modified'                            # long list, modified date sort
+alias la='exa -lbhHigUmuSa --time-style=long-iso --git --color-scale'  # all list
+alias lx='exa -lbhHigUmuSa@ --time-style=long-iso --git --color-scale' # all + extended list
+
+# specialty views
+alias lS='exa -1'                                                      # one column, just names
+alias lt='exa --tree --level=2'                                        # tree
+
 alias gs='git status -sb'
 alias ga='git add -A'
 alias gcv='git commit -v'
@@ -57,14 +69,13 @@ alias gho='$(git remote -v 2> /dev/null | grep github | sed -e "s/.*git\:\/\/\([
 alias tf='tail -f'
 alias psg='ps auxww | grep'
 alias gitdf='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-alias ll='ls -F -l -a -h -O'
 alias flushdns='sudo killall -HUP mDNSResponder; sudo killall mDNSResponderHelper; sudo dscacheutil -flushcache'
 
 # Helper Aliases
 alias grep='grep --color=auto' # Always highlight grep search term
-alias ping='ping -c 5'      # Pings with 5 packets, not unlimited
-alias df='df -h'            # Disk free, in gigabytes, not bytes
-alias du='du -h -c'         # Calculate total disk usage for a folder
+alias ping='ping -c 5'         # Pings with 5 packets, not unlimited
+alias df='df -h'               # Disk free, in gigabytes, not bytes
+alias du='du -h -c'            # Calculate total disk usage for a folder
 
 ## Better ZSH History --------------------------------------------------------
 autoload -U up-line-or-beginning-search
@@ -76,5 +87,6 @@ zle -N down-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
 
+## Chruby ---------------------------------------------------------------------
 source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
