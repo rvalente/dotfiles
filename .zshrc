@@ -44,6 +44,8 @@ cdpath=(
 )
 
 ## Aliases -------------------------------------------------------------------
+alias ll='exa -lbF --git'
+alias lt='exa --tree --level=2'
 alias gs='git status -sb'
 alias ga='git add'
 alias gc='git commit'
@@ -54,7 +56,6 @@ alias gp='git push'
 alias gd='git diff'
 alias gco='git checkout'
 alias gh='$(git remote -v 2> /dev/null | grep github | sed -e "s/.*git\:\/\/\([a-z]\.\)*/\1/" -e "s/\.git.*//g" -e "s/.*@\(.*\)$/\1/g" | tr ":" "/" | tr -d "\011" | sed -e "s/^/open http:\/\//g" | uniq)'
-
 alias tf='tail -f'
 alias psg='ps auxww | grep'
 alias gitdf='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
