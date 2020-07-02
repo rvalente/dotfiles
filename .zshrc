@@ -44,11 +44,6 @@ cdpath=(
 )
 
 ## Aliases -------------------------------------------------------------------
-alias ls='exa'                                        # ls
-alias ll='exa -lbF --git'                             # list, size, type, git
-alias lt='exa --tree --level=2'                       # tree
-
-# Git aliases
 alias gs='git status -sb'
 alias ga='git add'
 alias gc='git commit'
