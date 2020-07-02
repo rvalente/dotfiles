@@ -44,27 +44,21 @@ cdpath=(
 )
 
 ## Aliases -------------------------------------------------------------------
-# general use
-alias ls='exa'                                                         # ls
-alias l='exa -lbF --git'                                               # list, size, type, git
-alias ll='exa -lbGF --git'                                             # long list
-alias llm='exa -lbGd --git --sort=modified'                            # long list, modified date sort
-alias la='exa -lbhHigUmuSa --time-style=long-iso --git --color-scale'  # all list
-alias lx='exa -lbhHigUmuSa@ --time-style=long-iso --git --color-scale' # all + extended list
+alias ls='exa'                                        # ls
+alias ll='exa -lbF --git'                             # list, size, type, git
+alias lt='exa --tree --level=2'                       # tree
 
-# specialty views
-alias lS='exa -1'                                                      # one column, just names
-alias lt='exa --tree --level=2'                                        # tree
-
+# Git aliases
 alias gs='git status -sb'
-alias ga='git add -A'
+alias ga='git add'
+alias gc='git commit'
+alias gb='git branch'
 alias gcv='git commit -v'
 alias gcm='git commit -m'
 alias gp='git push'
-alias gd='git diff | $GIT_EDITOR -'
-alias gb='git branch'
-alias gba='git branch -a'
-alias gho='$(git remote -v 2> /dev/null | grep github | sed -e "s/.*git\:\/\/\([a-z]\.\)*/\1/" -e "s/\.git.*//g" -e "s/.*@\(.*\)$/\1/g" | tr ":" "/" | tr -d "\011" | sed -e "s/^/open http:\/\//g" | uniq)'
+alias gd='git diff'
+alias gco='git checkout'
+alias gh='$(git remote -v 2> /dev/null | grep github | sed -e "s/.*git\:\/\/\([a-z]\.\)*/\1/" -e "s/\.git.*//g" -e "s/.*@\(.*\)$/\1/g" | tr ":" "/" | tr -d "\011" | sed -e "s/^/open http:\/\//g" | uniq)'
 
 alias tf='tail -f'
 alias psg='ps auxww | grep'

@@ -17,14 +17,16 @@
 	algorithm = histogram
 	compactionHeuristic = true
 [alias]
+        patch = !git --no-pager diff --no-color
+        ci    = commit
 	co    = checkout
 	st    = status
 	br    = branch
-	graph = log --graph --date-order --all --pretty=format:'%h %Cred%d %Cgreen%ad %Cblue%cn %Creset%s' --date=short
+        type  = cat-file -t
+        dump  = cat-file -p
+	hist  = log --pretty=format:'%h %Cgreen%ad %Creset| %s %Cred%d %Cblue[%an]' --graph --date=short
 [help]
 	autocorrect = 0
-[alias]
-        patch = !git --no-pager diff --no-color
 [include]
 	path = ~/.gitconfig.local
 [pack]
