@@ -1,10 +1,11 @@
 ;;; init.el --- my basic emacs setup for sane defaults
 
-;; Copyright 2019 Ronald Valente
+;; Copyright 2020 Ronald Valente
 
 ;; Author: Ronald Valente
-;; Version: 1.1.0
+;; Version: 2.0.0
 ;; Created: 2019-04-04
+;; Update: 2020-07-04
 
 ;;; Commentary:
 
@@ -13,32 +14,22 @@
 
 ;;; Code:
 
-;; Start - Keep Use Package At the Top
-;; Safer Way to Check Packages
-;; https://glyph.twistedmatrix.com/2015/11/editor-malware.html
-(require 'package)
-(setq package-archives
-      '(("gnu" . "https://elpa.gnu.org/packages/")
-        ("melpa-stable" . "https://stable.melpa.org/packages/")
-        ("melpa" . "https://melpa.org/packages/"))
-      tls-checktrust t
-      tls-program '("gnutls-cli --x509cafile %t -p %p %h")
-      gnutls-verify-error t)
+;; Migrate to straight.el to replace package.el
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 
-(package-initialize)
-
-(setq use-package-always-ensure nil)
-
-(unless (require 'use-package nil t)
-  (if (not (yes-or-no-p (concat "Refresh packages, install use-package and"
-                                " other packages used by init file? ")))
-      (error "you need to install use-package first")
-    (package-refresh-contents)
-    (package-install 'use-package)
-    (require 'use-package)
-    (setq use-package-always-ensure t)))
-
-;; End
+;; Setup stright.el integration with use-package
+(straight-use-package 'use-package)
 
 ;; Minimal UI
 (scroll-bar-mode -1)
@@ -56,6 +47,7 @@
 (setq inhibit-startup-message t)              ;; hide the startup message
 (setq ring-bell-function 'ignore)             ;; disable the annoying bell
 (setq require-final-newline t)                ;; Newline at the end of the file, always
+(setq-default indent-tabs-mode nil)           ;; Use spaces instead of tabs
 
 ;; Fancy titlebar for macOS
 ;; Removes the dark gray titlebar from macOS window
@@ -63,27 +55,6 @@
 (add-to-list 'default-frame-alist '(ns-appearance . darl))
 (setq ns-use-proxy-icon nil)
 (setq frame-title-format nil)
-
-;; Better integration with macOS shell
-(use-package exec-path-from-shell
-  :ensure t
-  :config
-  (when (memq window-system '(mac ns x))
-    (exec-path-from-shell-initialize)
-    (exec-path-from-shell-copy-env "GOPATH")))
-
-;; Use spaces instead of tabs
-(setq-default indent-tabs-mode nil)
-
-;; Enable UTF-8 Everywhere
-(prefer-coding-system 'utf-8-unix)
-(set-default-coding-systems 'utf-8)
-(set-terminal-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
-(set-selection-coding-system 'utf-8)
-(set-file-name-coding-system 'utf-8)
-(set-clipboard-coding-system 'utf-8)
-(set-buffer-file-coding-system 'utf-8)
 
 ;; Use macOS Built In Menlo Font
 (set-face-attribute 'default nil
@@ -93,20 +64,28 @@
                     :width 'normal)
 (set-frame-font "Menlo-12" nil t)
 
+;; Better integration with macOS shell
+(use-package exec-path-from-shell
+  :straight t
+  :config
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)
+    (exec-path-from-shell-copy-env "GOPATH")))
+
 (use-package magit
-  :ensure t
+  :straight t
   :bind (("C-x g" . magit-status)
          ("C-x M-g" . magit-dispatch)))
 
 (use-package projectile
-  :ensure t
+  :straight t
   :config
   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (projectile-mode +1))
   
 (use-package treemacs
-  :ensure t
+  :straight t
   :bind
   (:map global-map
         ("C-<f8>" . treemacs-select-window)
@@ -116,21 +95,21 @@
 
 (use-package treemacs-projectile
   :after treemacs projectile
-  :ensure t)
+  :straight t)
 
 (use-package treemacs-magit
   :after treemacs magit
-  :ensure t)
+  :straight t)
 
 ;; Only trim whitespace for lines you have edited
 (use-package ws-butler
-  :ensure t
+  :straight t
   :config
   (ws-butler-global-mode)
   (setq ws-butler-keep-whitespace-before-point nil))
 
 (use-package lsp-mode
-  :ensure t
+  :straight t
   :commands (lsp lsp-deferred)
   :hook (go-mode . lsp-deferred))
 
@@ -143,12 +122,12 @@
 
 ;; Optional - provides fancier overlays.
 (use-package lsp-ui
-  :ensure t
+  :straight t
   :commands lsp-ui-mode)
 
 ;; Company mode is a standard completion package that works well with lsp-mode.
 (use-package company
-  :ensure t
+  :straight t
   :config
   ;; Optionally enable completion-as-you-type behavior.
   (setq company-idle-delay 0)
@@ -156,21 +135,6 @@
 
 ;; Optional - provides snippet support.
 (use-package yasnippet
-  :ensure t
+  :straight t
   :commands yas-minor-mode
   :hook (go-mode . yas-minor-mode))
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (treemacs yasnippet yaml-mode web-mode use-package sql-indent org-fancy-priorities ob-mermaid ob-go nord-theme lsp-ui htmlize go-mode github-theme forge flycheck exec-path-from-shell company-lsp))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
