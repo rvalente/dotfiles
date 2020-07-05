@@ -83,7 +83,7 @@
   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (projectile-mode +1))
-  
+
 (use-package treemacs
   :straight t
   :bind
@@ -120,7 +120,7 @@
   (add-hook 'before-save-hook #'lsp-organize-imports t t))
 (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
 
-;; Optional - provides fancier overlays.
+;; Nicer overlays for LSP
 (use-package lsp-ui
   :straight t
   :commands lsp-ui-mode)
@@ -138,3 +138,31 @@
   :straight t
   :commands yas-minor-mode
   :hook (go-mode . yas-minor-mode))
+
+;; Setup web-mode for gohtml and html
+(use-package web-mode
+  :straight t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.gohtml\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+  (setq web-mode-engines-alist
+        '(("go" . "\\.gohtml\\'")))
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-code-indent-offset 2))
+
+;; Setup markdown-mode for the best markdown experience
+(use-package markdown-mode
+  :straight t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "multimarkdown"))
+
+;; Setup flycheck syntax checking
+(use-package flycheck
+  :straight t
+  :init (global-flycheck-mode))
+
+;;; init.el ends here
