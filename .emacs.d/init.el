@@ -49,6 +49,9 @@
 (setq require-final-newline t)                ;; Newline at the end of the file, always
 (setq-default indent-tabs-mode nil)           ;; Use spaces instead of tabs
 
+;; revert buffers automatically when underlying files are changed externally
+(global-auto-revert-mode t)
+
 ;; Fancy titlebar for macOS
 ;; Removes the dark gray titlebar from macOS window
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
@@ -56,13 +59,26 @@
 (setq ns-use-proxy-icon nil)
 (setq frame-title-format nil)
 
-;; Use macOS Built In Menlo Font
-(set-face-attribute 'default nil
-		    :font "Menlo-12"
-                    :height 100
-                    :weight 'normal
-                    :width 'normal)
-(set-frame-font "Menlo-12" nil t)
+(set-face-attribute 'default nil :font "Fira Code Retina-12")
+(set-frame-font "Fira Code Retina-12" nil t)
+
+;; more useful frame title
+(setq frame-title-format
+      '((:eval (if (buffer-file-name)
+                   (abbreviate-file-name (buffer-file-name))
+                 "%b"))))
+
+;; enable y/n answers
+(fset 'yes-or-no-p 'y-or-n-p)
+
+;; Make emacs more performant
+(setq gc-cons-threshold 50000000)             ;; run gc every 50mb instead of 0.7mb
+(setq large-file-warning-threshold 100000000) ;; warn when opening files larger than 100MB
+
+;; nice scrolling
+(setq scroll-margin 0
+      scroll-conservatively 100000
+      scroll-preserve-screen-position 1)
 
 ;; Better integration with macOS shell
 (use-package exec-path-from-shell
@@ -71,6 +87,18 @@
   (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize)
     (exec-path-from-shell-copy-env "GOPATH")))
+
+(use-package paren
+  :config
+  (show-paren-mode +1))
+
+(use-package elec-pair
+  :config
+  (electric-pair-mode +1))
+
+(use-package hl-line
+  :config
+  (global-hl-line-mode +1))
 
 (use-package magit
   :straight t
@@ -108,9 +136,13 @@
   (ws-butler-global-mode)
   (setq ws-butler-keep-whitespace-before-point nil))
 
+;; Enable language server protocol support
+;; https://github.com/golang/tools/blob/master/gopls/doc/emacs.md
 (use-package lsp-mode
   :straight t
   :commands (lsp lsp-deferred)
+  :config
+  (setq lsp-prefer-flymake nil)
   :hook (go-mode . lsp-deferred))
 
 ;; Set up before-save hooks to format buffer and add/delete imports.
@@ -120,10 +152,21 @@
   (add-hook 'before-save-hook #'lsp-organize-imports t t))
 (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
 
-;; Nicer overlays for LSP
+;; Optional - provides fancier overlays.
 (use-package lsp-ui
   :straight t
-  :commands lsp-ui-mode)
+  :commands lsp-ui-mode
+  :hook (lsp-mode-hook . lsp-ui-mode)
+  :config
+  (setq lsp-ui-doc-enable nil
+        lsp-ui-peek-enable t
+        lsp-ui-sideline-enable t
+        lsp-ui-imenu-enable t
+        lsp-ui-flycheck-enable t
+        lsp-gopls-staticcheck t
+        lsp-eldoc-render-all t
+        lsp-gopls-complete-unimported t)
+  :init)
 
 ;; Company mode is a standard completion package that works well with lsp-mode.
 (use-package company
@@ -131,13 +174,33 @@
   :config
   ;; Optionally enable completion-as-you-type behavior.
   (setq company-idle-delay 0)
-  (setq company-minimum-prefix-length 1))
+  (setq company-minimum-prefix-length 1)
+  (setq company-tooltop-align-annotations t))
+
+;; company-lsp integrates company mode completion with lsp-mode.
+;; completion-at-point also works out of the box but doesn't support snippets.
+(use-package company-lsp
+  :straight t
+  :after company
+  :commands company-lsp
+  :config
+  (push 'company-lsp company-backends))
 
 ;; Optional - provides snippet support.
 (use-package yasnippet
   :straight t
   :commands yas-minor-mode
   :hook (go-mode . yas-minor-mode))
+
+;; Enable Golang Support
+(use-package go-mode
+  :straight t
+  :hook ((go-mode . lsp-deferred)
+         (before-save . lsp-format-buffer)
+         (before-save . lsp-organize-imports)))
+
+(use-package sql-indent
+  :straight t)
 
 ;; Setup web-mode for gohtml and html
 (use-package web-mode
@@ -164,5 +227,9 @@
 (use-package flycheck
   :straight t
   :init (global-flycheck-mode))
+
+;; Org-mode Configuration
+;; Don't ask for confirmation on eval buffers
+(setq org-confirm-babel-evaluate nil)
 
 ;;; init.el ends here
