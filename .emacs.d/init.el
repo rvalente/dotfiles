@@ -46,6 +46,7 @@
 (size-indication-mode t)
 (setq inhibit-startup-message t)              ;; hide the startup message
 (setq ring-bell-function 'ignore)             ;; disable the annoying bell
+(setq show-trailing-whitespace t)             ;; display trailing whitespace
 (setq require-final-newline t)                ;; Newline at the end of the file, always
 (setq-default indent-tabs-mode nil)           ;; Use spaces instead of tabs
 
@@ -88,17 +89,33 @@
     (exec-path-from-shell-initialize)
     (exec-path-from-shell-copy-env "GOPATH")))
 
+;; Install Doom Themes
+(use-package doom-themes
+  :straight t
+  :config
+  ;; Global settings (defaults)
+  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  (load-theme 'doom-one-light t)
+  ;; Enable flashing mode-line on errors
+  (doom-themes-visual-bell-config)
+  ;; Enable custom treemacs theme
+  (setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
+  (doom-themes-treemacs-config)
+  ;; Corrects (and improves) org-mode's native fontification.
+  (doom-themes-org-config))
+
 (use-package paren
   :config
-  (show-paren-mode +1))
+  (show-paren-mode t))
 
 (use-package elec-pair
   :config
-  (electric-pair-mode +1))
+  (electric-pair-mode t))
 
 (use-package hl-line
   :config
-  (global-hl-line-mode +1))
+  (global-hl-line-mode t))
 
 (use-package magit
   :straight t
@@ -129,12 +146,36 @@
   :after treemacs magit
   :straight t)
 
-;; Only trim whitespace for lines you have edited
-(use-package ws-butler
+;; Setup whitespace cleanup
+(add-hook 'before-save-hook 'whitespace-cleanup)
+
+;; Have a much more intelligent deletion of whitespace before words
+(use-package smart-hungry-delete
   :straight t
-  :config
-  (ws-butler-global-mode)
-  (setq ws-butler-keep-whitespace-before-point nil))
+  :bind (("<backspace>" . smart-hungry-delete-backward-char)
+                 ("C-d" . smart-hungry-delete-forward-char))
+  :defer nil ;; dont defer so we can add our functions to hooks
+  :config (smart-hungry-delete-add-default-hooks)
+  )
+
+;; Docker support
+(use-package dockerfile-mode
+  :straight t
+  :mode  (("\\Dockerfile\\'" . dockerfile-mode)))
+
+;; Enable YAML Support
+(use-package yaml-mode
+  :straight t
+  :mode (("\\.yml\\'" . yaml-mode)
+         ("\\.yaml\\'" . yaml-mode)))
+
+;; Create a dedicated backup directory
+(setq
+ backup-directory-alist '(("." . "~/.emacs.d/backups"))
+ delete-old-versions -1
+ version-control t
+ vc-make-backup-files t
+ backup-by-copying t)
 
 ;; Enable language server protocol support
 ;; https://github.com/golang/tools/blob/master/gopls/doc/emacs.md
@@ -201,15 +242,6 @@
 
 (use-package sql-indent
   :straight t)
-
-;; Have a much more intelligent deletion of whitespace before words
-(use-package smart-hungry-delete
-  :straight t
-  :bind (("<backspace>" . smart-hungry-delete-backward-char)
-		 ("C-d" . smart-hungry-delete-forward-char))
-  :defer nil ;; dont defer so we can add our functions to hooks 
-  :config (smart-hungry-delete-add-default-hooks)
-  )
 
 ;; Setup web-mode for gohtml and html
 (use-package web-mode

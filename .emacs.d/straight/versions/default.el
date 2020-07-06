@@ -5,8 +5,10 @@
  ("company-lsp" . "f921ffa0cdc542c21dc3dd85f2c93df4288e83bd")
  ("company-mode" . "1f56bec0ba7ce336eb8661b4d34e4b024d7dd04c")
  ("dash.el" . "732d92eac56023a4fb4a5dc3d9d4e274ebf44bf9")
+ ("dockerfile-mode" . "d31f7685ebc5832d957e25070a930aa42984327d")
  ("doom-modeline" . "1c4711c719e4700694c49d8f1d91a7396dfa6746")
  ("emacs-async" . "86aef2c38e7d35e8509b7feeee3e989d825eba91")
+ ("emacs-doom-themes" . "7307dc6ca2faf408aade90281179678a78193eec")
  ("emacs-memoize" . "51b075935ca7070f62fae1d69fe0ff7d8fa56fdd")
  ("emacs-smart-hungry-delete" . "7c1d56a92481594e14d40b5fdf6c48657a0108a0")
  ("emacsmirror-mirror" . "5d8df117215e4d7e816bd63672cd467e532c662d")
@@ -38,6 +40,6 @@
  ("use-package" . "bfc5ecd69cdf71fae0af722d90336c66a6415f03")
  ("web-mode" . "60ffd878c4371644bd964f00fea38054645e3e47")
  ("with-editor" . "7c512887c6d69864fb600d32fb92857c51babcff")
- ("ws-butler" . "52321b99be69aa1b661da7743c4421a30d8b6bcb")
+ ("yaml-mode" . "34648f2502f52f4744d62758fa381fa35db1da49")
  ("yasnippet" . "d3d6d70b1cd4818d271752468e0fdb0788db750d"))
 :alpha
