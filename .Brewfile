@@ -12,6 +12,7 @@ cask 'virtualbox'
 # Fonts
 cask 'font-hack'
 cask 'font-fontawesome'
+cask 'font-fira-code'
 
 # Packages
 brew 'antibody'
