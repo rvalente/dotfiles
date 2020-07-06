@@ -48,7 +48,8 @@
 (setq ring-bell-function 'ignore)             ;; disable the annoying bell
 (setq show-trailing-whitespace t)             ;; display trailing whitespace
 (setq require-final-newline t)                ;; Newline at the end of the file, always
-(setq-default indent-tabs-mode nil)           ;; Use spaces instead of tabs
+(setq-default tab-width 4
+              indent-tabs-mode nil)           ;; Use spaces instead of tabs, tabs are 4 spaces
 (setq initial-major-mode 'org-mode)           ;; Set scratch buffer to be org-mode
 
 
@@ -90,6 +91,10 @@
     (exec-path-from-shell-initialize)
     (exec-path-from-shell-copy-env "GOPATH")))
 
+;; hide minor modes to keep modeline clean
+(use-package diminish
+  :straight t)
+
 ;; Install Doom Themes
 (use-package doom-themes
   :straight t
@@ -109,6 +114,26 @@
 (use-package paren
   :config
   (show-paren-mode t))
+
+;; smart parens for better matching paren workflow
+(use-package smartparens
+  :straight t
+  :diminish smartparens-mode
+  :config
+  (progn
+    (require 'smartparens-config)
+    (smartparens-global-mode 1)
+    (show-paren-mode t)))
+
+(use-package expand-region
+  :straight t
+  :bind ("M-m" . er/expand-region))
+
+(use-package which-key
+  :straight t
+  :diminish which-key-mode
+  :config
+  (which-key-mode +1))
 
 (use-package elec-pair
   :config
@@ -208,7 +233,8 @@
         lsp-gopls-staticcheck t
         lsp-eldoc-render-all t
         lsp-gopls-complete-unimported t)
-  :init)
+  :init
+  (add-hook 'after-init-hook #'global-company-mode))
 
 ;; Company mode is a standard completion package that works well with lsp-mode.
 (use-package company
