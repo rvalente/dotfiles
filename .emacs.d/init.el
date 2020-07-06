@@ -49,6 +49,8 @@
 (setq show-trailing-whitespace t)             ;; display trailing whitespace
 (setq require-final-newline t)                ;; Newline at the end of the file, always
 (setq-default indent-tabs-mode nil)           ;; Use spaces instead of tabs
+(setq initial-major-mode 'org-mode)           ;; Set scratch buffer to be org-mode
+
 
 ;; revert buffers automatically when underlying files are changed externally
 (global-auto-revert-mode t)
@@ -57,7 +59,6 @@
 ;; Removes the dark gray titlebar from macOS window
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 (add-to-list 'default-frame-alist '(ns-appearance . darl))
-(setq ns-use-proxy-icon nil)
 (setq frame-title-format nil)
 
 (set-face-attribute 'default nil :font "Fira Code Retina-12")
@@ -291,7 +292,20 @@
   ("C-<next>" . centaur-tabs-forward))
 
 ;; Org-mode Configuration
+(require 'org)
+(setq
+ org-catch-invisible-edits 'error
+ org-return-follows-link t
+ org-src-preserve-indentation t
+ org-src-fontify-natively t
+ org-src-tab-acts-natively t
+ org-ellipsis " ▼"
+ org-cycle-separator-lines 1)
+
 ;; Don't ask for confirmation on eval buffers
 (setq org-confirm-babel-evaluate nil)
+
+;; All org mode files live in $HOME/org
+(setq org-agenda-files '("~/org/"))
 
 ;;; init.el ends here
