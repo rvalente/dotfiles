@@ -202,6 +202,15 @@
 (use-package sql-indent
   :straight t)
 
+;; Have a much more intelligent deletion of whitespace before words
+(use-package smart-hungry-delete
+  :straight t
+  :bind (("<backspace>" . smart-hungry-delete-backward-char)
+		 ("C-d" . smart-hungry-delete-forward-char))
+  :defer nil ;; dont defer so we can add our functions to hooks 
+  :config (smart-hungry-delete-add-default-hooks)
+  )
+
 ;; Setup web-mode for gohtml and html
 (use-package web-mode
   :straight t
@@ -213,6 +222,16 @@
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-code-indent-offset 2))
+
+;; Ensure that you install all-the-icons font
+;; M-x all-the-icons-install-fonts
+(use-package all-the-icons
+  :straight t)
+
+;; Better modeline using doom-modeline
+(use-package doom-modeline
+  :straight t
+  :init (doom-modeline-mode 1))
 
 ;; Setup markdown-mode for the best markdown experience
 (use-package markdown-mode
@@ -227,6 +246,17 @@
 (use-package flycheck
   :straight t
   :init (global-flycheck-mode))
+
+;; Setup Tabs for Window
+(use-package centaur-tabs
+  :straight t
+  :demand
+  :config
+  (centaur-tabs-mode t)
+  (setq centaur-tabs-style "bar")
+  :bind
+  ("C-<prior>" . centaur-tabs-backward)
+  ("C-<next>" . centaur-tabs-forward))
 
 ;; Org-mode Configuration
 ;; Don't ask for confirmation on eval buffers
