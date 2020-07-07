@@ -133,7 +133,8 @@
   :straight t
   :diminish which-key-mode
   :config
-  (which-key-mode +1))
+  (which-key-mode +1)
+  (add-hook 'after-init-hook 'which-key-mode))
 
 (use-package elec-pair
   :config
@@ -291,6 +292,26 @@
 (use-package doom-modeline
   :straight t
   :init (doom-modeline-mode 1))
+
+;; fzf is a fuzzy file finder which is very quick.
+(use-package fzf
+  :straight t)
+
+(use-package rainbow-mode
+  :straight t
+  :config
+  (setq rainbow-x-colors nil)
+  (add-hook 'prog-mode-hook 'rainbow-mode))
+
+;; rg support
+(use-package deadgrep
+  :straight t)
+
+;; use and enable writegood-mode
+(use-package writegood-mode
+  :straight t
+  :config
+  (add-hook 'markdown-mode-hook 'writegood-mode))
 
 ;; Setup markdown-mode for the best markdown experience
 (use-package markdown-mode
