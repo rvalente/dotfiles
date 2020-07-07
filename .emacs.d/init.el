@@ -308,6 +308,7 @@
   :straight t
   :config
   (add-to-list 'auto-mode-alist '("\\.gohtml\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.xml?\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
   (setq web-mode-engines-alist
         '(("go" . "\\.gohtml\\'")))
