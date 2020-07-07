@@ -26,7 +26,7 @@
  ("ht.el" . "fff8c43f0e03d5b98deb9f988522b839ce2ca253")
  ("hydra" . "8a9124f80b6919ad5288172b3e9f46c5332763ca")
  ("let-alist" . "ef3c02fa292b6e32769945bbbfb7f2e5ac574b64")
- ("lsp-mode" . "41e9a557d09fe603e1a51f4585924f683f0f9421")
+ ("lsp-mode" . "78341db8583e0e29192e8404789b1410a24989e1")
  ("lsp-ui" . "7d5326430eb88a58e111cb22ffa42c7d131e5052")
  ("magit" . "7d4bcd72d478f62015d45a24a4a7419135a14cdf")
  ("markdown-mode" . "399df42755ccf31cecb61c9f5d8ad72bc30d7e4b")
