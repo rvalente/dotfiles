@@ -42,6 +42,7 @@
  ("spinner" . "2daa167bec1c7566d662d48613a94453536b524a")
  ("sql-indent" . "c338484064beda89e23840718eccf81ffe8b5deb")
  ("straight.el" . "a7f94876b2bf96d2595706270be6630ecc94f0d3")
+ ("swiper" . "c6b60d34ac37bf4d91a25f16d22e528f85e06938")
  ("transient" . "73694be44a802cac89bfe0798e2a4aeb79e39ead")
  ("treemacs" . "1ce0bd487f0b9178744e19bbc48b6692c55c590c")
  ("use-package" . "bfc5ecd69cdf71fae0af722d90336c66a6415f03")

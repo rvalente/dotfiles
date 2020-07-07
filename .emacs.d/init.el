@@ -115,6 +115,37 @@
   :config
   (show-paren-mode t))
 
+;; completion using ivy
+(use-package ivy
+  :straight t
+  :diminish (ivy-mode)
+  :bind (("C-x b" . ivy-switch-buffer))
+  :config
+  (ivy-mode t)
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-display-style 'fancy))
+
+;; collection of ivy enhanced versions of common emacs commands
+(use-package counsel
+  :straight t
+  :bind (("M-x" . counsel-M-x)))
+
+;; Remove Odd Undo Binding
+(global-unset-key (kbd "C-/"))
+
+;; enhanced version of isearch
+(use-package swiper
+  :straight t
+  :bind (("C-/" . counsel-grep-or-swiper)))
+
+;; menu for ivy
+(use-package ivy-hydra
+  :straight t)
+
+;; jump to char or line quickly
+(use-package avy
+  :straight t)
+
 ;; smart parens for better matching paren workflow
 (use-package smartparens
   :straight t
@@ -154,6 +185,7 @@
   :config
   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (setq projectile-project-search-path '("~/org/" "~/code/"))
   (projectile-mode +1))
 
 (use-package treemacs
