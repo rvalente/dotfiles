@@ -142,10 +142,6 @@
 (use-package ivy-hydra
   :straight t)
 
-;; jump to char or line quickly
-(use-package avy
-  :straight t)
-
 ;; smart parens for better matching paren workflow
 (use-package smartparens
   :straight t
@@ -339,6 +335,11 @@
 ;; rg support
 (use-package deadgrep
   :straight t)
+
+;; Support going to the last change in the buffer
+(use-package goto-last-change
+  :straight t
+  :bind (("C-;" . goto-last-change)))
 
 ;; use and enable writegood-mode
 (use-package writegood-mode
