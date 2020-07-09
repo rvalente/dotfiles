@@ -359,7 +359,44 @@
 ;; Setup flycheck syntax checking
 (use-package flycheck
   :straight t
-  :init (global-flycheck-mode))
+  :init (global-flycheck-mode)
+  :config
+  (add-hook 'after-init-hook 'global-flycheck-mode)
+  (setq-default flycheck-highlighting-mode 'lines)
+  ;; Define fringe indicator / warning levels
+    (define-fringe-bitmap 'flycheck-fringe-bitmap-ball
+      (vector #b00000000
+              #b00000000
+              #b00000000
+              #b00000000
+              #b00000000
+              #b00000000
+              #b00000000
+              #b00011100
+              #b00111110
+              #b00111110
+              #b00111110
+              #b00011100
+              #b00000000
+              #b00000000
+              #b00000000
+              #b00000000
+              #b00000000))
+    (flycheck-define-error-level 'error
+      :severity 2
+      :overlay-category 'flycheck-error-overlay
+      :fringe-bitmap 'flycheck-fringe-bitmap-ball
+      :fringe-face 'flycheck-fringe-error)
+    (flycheck-define-error-level 'warning
+      :severity 1
+      :overlay-category 'flycheck-warning-overlay
+      :fringe-bitmap 'flycheck-fringe-bitmap-ball
+      :fringe-face 'flycheck-fringe-warning)
+    (flycheck-define-error-level 'info
+      :severity 0
+      :overlay-category 'flycheck-info-overlay
+      :fringe-bitmap 'flycheck-fringe-bitmap-ball
+      :fringe-face 'flycheck-fringe-info))
 
 ;; Setup Tabs for Window
 (use-package centaur-tabs
@@ -374,19 +411,22 @@
 
 ;; Org-mode Configuration
 (require 'org)
-(setq
- org-catch-invisible-edits 'error
- org-return-follows-link t
- org-src-preserve-indentation t
- org-src-fontify-natively t
- org-src-tab-acts-natively t
- org-ellipsis " ▼"
- org-cycle-separator-lines 1)
+(setq org-catch-invisible-edits 'error)
+(setq org-return-follows-link t)
+(setq org-src-preserve-indentation t)
+(setq org-src-fontify-natively t)
+(setq org-src-tab-acts-natively t)
+(setq org-ellipsis " ▼")
+(setq org-cycle-separator-lines 1)
 
 ;; Don't ask for confirmation on eval buffers
 (setq org-confirm-babel-evaluate nil)
 
+;; Support org-capture
+(define-key global-map "\C-cc" 'org-capture)
+
 ;; All org mode files live in $HOME/org
+(setq org-directory "~/org")
 (setq org-agenda-files '("~/org/"))
 
 ;;; init.el ends here
