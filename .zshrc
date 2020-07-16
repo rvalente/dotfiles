@@ -1,20 +1,19 @@
 # ~/.zshrc
 #
 # Global Order: zshenv > [zprofile] > zshrc > [zlogin]
-source <(antibody init)
-antibody bundle < ~/.zsh_plugins.txt
+
+eval "$(starship init zsh)"
+
+## ZSH Plugins ---------------------------------------------------------------
+source /opt/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /opt/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 ## History -------------------------------------------------------------------
 HISTFILE=~/.zhistory
 HISTSIZE=10000
 SAVEHIST=10000
 
-fpath+=("$HOME/.zsh/pure")
-
 autoload -Uz compinit && compinit
-
-autoload -U promptinit; promptinit
-prompt pure
 
 ## Options -------------------------------------------------------------------
 setopt appendhistory        #
@@ -44,6 +43,8 @@ cdpath=(
 )
 
 ## Aliases -------------------------------------------------------------------
+alias cat='bat'
+alias ls='exa'
 alias ll='exa -lbF --git'
 alias lt='exa --tree --level=2'
 alias gs='git status -sb'
@@ -78,5 +79,5 @@ bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
 
 ## Chruby ---------------------------------------------------------------------
-source /usr/local/share/chruby/chruby.sh
-source /usr/local/share/chruby/auto.sh
+source /opt/local/share/chruby/chruby.sh
+source /opt/local/share/chruby/auto.sh
