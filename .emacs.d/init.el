@@ -142,6 +142,12 @@
 (use-package ivy-hydra
   :straight t)
 
+;; ansible support
+(use-package ansible
+  :straight t
+  :init
+  (add-hook 'yaml-mode-hook '(lambda () (ansible 1))))
+
 ;; smart parens for better matching paren workflow
 (use-package smartparens
   :straight t

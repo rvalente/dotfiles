@@ -1,46 +1,53 @@
 [core]
-	preloadindex = true
-	excludesfile = ~/.gitignore
-        pager = delta --theme='Nord'
-	whitespace = trailing-space,space-before-tab,indent-with-non-tab
-	autocrlf = input
-	editor = vim
+  preloadindex = true
+  excludesfile = ~/.gitignore
+  pager = delta --theme='Nord'
+  whitespace = trailing-space,space-before-tab,indent-with-non-tab
+  autocrlf = input
+  editor = vim
 [interactive]
   diffFilter = delta --color-only
+[delta]
+  features = decorations
+  whitespace-error-style = 22 reverse
+[delta "decorations"]
+  commit-decoration-style = bold yellow box ul
+  file-style = bold yellow ul
+  file-decoration-style = none
 [color]
-	ui = true
-	branch = auto
-	diff   = auto
-	status = auto
+  ui = true
+  branch = auto
+  diff   = auto
+  status = auto
 [diff]
-	tool      = vimdiff
-	algorithm = histogram
-	compactionHeuristic = true
+  tool      = vimdiff
+  algorithm = histogram
+  compactionHeuristic = true
 [alias]
-        patch = !git --no-pager diff --no-color
-        ci    = commit
-	co    = checkout
-	st    = status
-	br    = branch
-        type  = cat-file -t
-        dump  = cat-file -p
-	hist  = log --pretty=format:'%h %Cgreen%ad %Creset| %s %Cred%d %Cblue[%an]' --graph --date=short
+  patch = !git --no-pager diff --no-color
+  ci    = commit
+  co    = checkout
+  st    = status
+  br    = branch
+  type  = cat-file -t
+  dump  = cat-file -p
+  hist  = log --pretty=format:'%h %Cgreen%ad %Creset| %s %Cred%d %Cblue[%an]' --graph --date=short
 [help]
-	autocorrect = 0
+  autocorrect = 0
 [include]
-	path = ~/.gitconfig.local
+  path = ~/.gitconfig.local
 [pack]
-	threads = 0
+  threads = 0
 [apply]
-	whitespace = fix
+  whitespace = fix
 [push]
-	default = simple
+  default = simple
 [commit]
-	template = ~/.gitmessage
-	gpgsign = true
+  template = ~/.gitmessage
+  gpgsign = true
 [credential]
-	helper = osxkeychain
+  helper = osxkeychain
 [gpg]
-	program = gpg
+  program = gpg
 [pull]
-	rebase = true
+  rebase = true

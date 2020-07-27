@@ -43,7 +43,6 @@ cdpath=(
 )
 
 ## Aliases -------------------------------------------------------------------
-alias cat='bat'
 alias ls='exa'
 alias ll='exa -lbF --git'
 alias lt='exa --tree --level=2'
