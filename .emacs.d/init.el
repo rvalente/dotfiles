@@ -14,22 +14,30 @@
 
 ;;; Code:
 
-;; Migrate to straight.el to replace package.el
-(defvar bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 5))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
+;; Start - Keep Use Package At the Top
+;; Safer Way to Check Packages
+;; https://glyph.twistedmatrix.com/2015/11/editor-malware.html
+(require 'package)
+(setq package-archives
+      '(("gnu" . "https://elpa.gnu.org/packages/")
+        ("melpa-stable" . "https://stable.melpa.org/packages/")
+        ("melpa" . "https://melpa.org/packages/"))
+      tls-checktrust t
+      tls-program '("gnutls-cli --x509cafile %t -p %p %h")
+      gnutls-verify-error t)
 
-;; Setup stright.el integration with use-package
-(straight-use-package 'use-package)
+(package-initialize)
+
+(setq use-package-always-ensure nil)
+
+(unless (require 'use-package nil t)
+  (if (not (yes-or-no-p (concat "Refresh packages, install use-package and"
+                                " other packages used by init file? ")))
+      (error "you need to install use-package first")
+    (package-refresh-contents)
+    (package-install 'use-package)
+    (require 'use-package)
+    (setq use-package-always-ensure t)))
 
 ;; Minimal UI
 (scroll-bar-mode -1)
@@ -83,9 +91,15 @@
       scroll-conservatively 100000
       scroll-preserve-screen-position 1)
 
+;; Better package browser
+(use-package paradox
+  :ensure t
+  :config
+  (paradox-enable))
+
 ;; Better integration with macOS shell
 (use-package exec-path-from-shell
-  :straight t
+  :ensure t
   :config
   (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize)
@@ -93,11 +107,11 @@
 
 ;; hide minor modes to keep modeline clean
 (use-package diminish
-  :straight t)
+  :ensure t)
 
 ;; Install Doom Themes
 (use-package doom-themes
-  :straight t
+  :ensure t
   :config
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
@@ -117,7 +131,7 @@
 
 ;; completion using ivy
 (use-package ivy
-  :straight t
+  :ensure t
   :diminish (ivy-mode)
   :bind (("C-x b" . ivy-switch-buffer))
   :config
@@ -127,7 +141,7 @@
 
 ;; collection of ivy enhanced versions of common emacs commands
 (use-package counsel
-  :straight t
+  :ensure t
   :bind (("M-x" . counsel-M-x)))
 
 ;; Remove Odd Undo Binding
@@ -135,22 +149,22 @@
 
 ;; enhanced version of isearch
 (use-package swiper
-  :straight t
+  :ensure t
   :bind (("C-/" . counsel-grep-or-swiper)))
 
 ;; menu for ivy
 (use-package ivy-hydra
-  :straight t)
+  :ensure t)
 
 ;; ansible support
 (use-package ansible
-  :straight t
+  :ensure t
   :init
   (add-hook 'yaml-mode-hook '(lambda () (ansible 1))))
 
 ;; smart parens for better matching paren workflow
 (use-package smartparens
-  :straight t
+  :ensure t
   :diminish smartparens-mode
   :config
   (progn
@@ -159,11 +173,11 @@
     (show-paren-mode t)))
 
 (use-package expand-region
-  :straight t
+  :ensure t
   :bind ("M-m" . er/expand-region))
 
 (use-package which-key
-  :straight t
+  :ensure t
   :diminish which-key-mode
   :config
   (which-key-mode +1)
@@ -178,12 +192,12 @@
   (global-hl-line-mode t))
 
 (use-package magit
-  :straight t
+  :ensure t
   :bind (("C-x g" . magit-status)
          ("C-x M-g" . magit-dispatch)))
 
 (use-package projectile
-  :straight t
+  :ensure t
   :config
   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
@@ -191,7 +205,7 @@
   (projectile-mode +1))
 
 (use-package treemacs
-  :straight t
+  :ensure t
   :bind
   (:map global-map
         ("C-<f8>" . treemacs-select-window)
@@ -201,18 +215,18 @@
 
 (use-package treemacs-projectile
   :after treemacs projectile
-  :straight t)
+  :ensure t)
 
 (use-package treemacs-magit
   :after treemacs magit
-  :straight t)
+  :ensure t)
 
 ;; Setup whitespace cleanup
 (add-hook 'before-save-hook 'whitespace-cleanup)
 
 ;; Have a much more intelligent deletion of whitespace before words
 (use-package smart-hungry-delete
-  :straight t
+  :ensure t
   :bind (("<backspace>" . smart-hungry-delete-backward-char)
                  ("C-d" . smart-hungry-delete-forward-char))
   :defer nil ;; dont defer so we can add our functions to hooks
@@ -221,12 +235,12 @@
 
 ;; Docker support
 (use-package dockerfile-mode
-  :straight t
+  :ensure t
   :mode  (("\\Dockerfile\\'" . dockerfile-mode)))
 
 ;; Enable YAML Support
 (use-package yaml-mode
-  :straight t
+  :ensure t
   :mode (("\\.yml\\'" . yaml-mode)
          ("\\.yaml\\'" . yaml-mode)))
 
@@ -241,7 +255,7 @@
 ;; Enable language server protocol support
 ;; https://github.com/golang/tools/blob/master/gopls/doc/emacs.md
 (use-package lsp-mode
-  :straight t
+  :ensure t
   :commands (lsp lsp-deferred)
   :config
   (setq lsp-prefer-flymake nil)
@@ -256,7 +270,7 @@
 
 ;; Optional - provides fancier overlays.
 (use-package lsp-ui
-  :straight t
+  :ensure t
   :commands lsp-ui-mode
   :hook (lsp-mode-hook . lsp-ui-mode)
   :config
@@ -273,7 +287,7 @@
 
 ;; Company mode is a standard completion package that works well with lsp-mode.
 (use-package company
-  :straight t
+  :ensure t
   :config
   ;; Optionally enable completion-as-you-type behavior.
   (setq company-idle-delay 0)
@@ -283,7 +297,7 @@
 ;; company-lsp integrates company mode completion with lsp-mode.
 ;; completion-at-point also works out of the box but doesn't support snippets.
 (use-package company-lsp
-  :straight t
+  :ensure t
   :after company
   :commands company-lsp
   :config
@@ -291,23 +305,23 @@
 
 ;; Optional - provides snippet support.
 (use-package yasnippet
-  :straight t
+  :ensure t
   :commands yas-minor-mode
   :hook (go-mode . yas-minor-mode))
 
 ;; Enable Golang Support
 (use-package go-mode
-  :straight t
+  :ensure t
   :hook ((go-mode . lsp-deferred)
          (before-save . lsp-format-buffer)
          (before-save . lsp-organize-imports)))
 
 (use-package sql-indent
-  :straight t)
+  :ensure t)
 
 ;; Setup web-mode for gohtml and html
 (use-package web-mode
-  :straight t
+  :ensure t
   :config
   (add-to-list 'auto-mode-alist '("\\.gohtml\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.xml?\\'" . web-mode))
@@ -321,41 +335,41 @@
 ;; Ensure that you install all-the-icons font
 ;; M-x all-the-icons-install-fonts
 (use-package all-the-icons
-  :straight t)
+  :ensure t)
 
 ;; Better modeline using doom-modeline
 (use-package doom-modeline
-  :straight t
+  :ensure t
   :init (doom-modeline-mode 1))
 
 ;; fzf is a fuzzy file finder which is very quick.
 (use-package fzf
-  :straight t)
+  :ensure t)
 
 (use-package rainbow-mode
-  :straight t
+  :ensure t
   :config
   (setq rainbow-x-colors nil)
   (add-hook 'prog-mode-hook 'rainbow-mode))
 
 ;; rg support
 (use-package deadgrep
-  :straight t)
+  :ensure t)
 
 ;; Support going to the last change in the buffer
 (use-package goto-last-change
-  :straight t
+  :ensure t
   :bind (("C-;" . goto-last-change)))
 
 ;; use and enable writegood-mode
 (use-package writegood-mode
-  :straight t
+  :ensure t
   :config
   (add-hook 'markdown-mode-hook 'writegood-mode))
 
 ;; Setup markdown-mode for the best markdown experience
 (use-package markdown-mode
-  :straight t
+  :ensure t
   :commands (markdown-mode gfm-mode)
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
@@ -364,7 +378,7 @@
 
 ;; Setup flycheck syntax checking
 (use-package flycheck
-  :straight t
+  :ensure t
   :init (global-flycheck-mode)
   :config
   (add-hook 'after-init-hook 'global-flycheck-mode)
@@ -392,7 +406,7 @@
       :severity 2
       :overlay-category 'flycheck-error-overlay
       :fringe-bitmap 'flycheck-fringe-bitmap-ball
-      :fringe-face 'flycheck-fringe-error)
+      :fringe-face 'flycplHeck-fringe-error)
     (flycheck-define-error-level 'warning
       :severity 1
       :overlay-category 'flycheck-warning-overlay
@@ -406,7 +420,7 @@
 
 ;; Setup Tabs for Window
 (use-package centaur-tabs
-  :straight t
+  :ensure t
   :demand
   :config
   (centaur-tabs-mode t)
@@ -435,4 +449,5 @@
 (setq org-directory "~/org")
 (setq org-agenda-files '("~/org/"))
 
+(setq custom-file (concat user-emacs-directory "/custom.el"))
 ;;; init.el ends here
