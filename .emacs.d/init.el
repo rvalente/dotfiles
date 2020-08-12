@@ -19,7 +19,8 @@
 ;; https://glyph.twistedmatrix.com/2015/11/editor-malware.html
 (require 'package)
 (setq package-archives
-      '(("melpa-stable" . "https://stable.melpa.org/packages/")
+      '(("gnu" . "https://elpa.gnu.org/packages/")
+        ("melpa-stable" . "https://stable.melpa.org/packages/")
         ("org" . "https://orgmode.org/elpa/")
         ("melpa" . "https://melpa.org/packages/"))
       tls-checktrust t
@@ -198,11 +199,11 @@
 
 (use-package projectile
   :ensure t
+  :diminish projectile-mode
   :config
-  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+  (projectile-mode +1)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-  (setq projectile-project-search-path '("~/code/"))
-  (projectile-mode +1))
+  (setq projectile-project-search-path '("~/code/")))
 
 (use-package treemacs
   :ensure t
