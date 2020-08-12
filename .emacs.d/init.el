@@ -19,8 +19,8 @@
 ;; https://glyph.twistedmatrix.com/2015/11/editor-malware.html
 (require 'package)
 (setq package-archives
-      '(("gnu" . "https://elpa.gnu.org/packages/")
-        ("melpa-stable" . "https://stable.melpa.org/packages/")
+      '(("melpa-stable" . "https://stable.melpa.org/packages/")
+        ("org" . "https://orgmode.org/elpa/")
         ("melpa" . "https://melpa.org/packages/"))
       tls-checktrust t
       tls-program '("gnutls-cli --x509cafile %t -p %p %h")
@@ -216,6 +216,10 @@
 (use-package treemacs-projectile
   :after treemacs projectile
   :ensure t)
+
+(use-package org
+  :mode (("\\.org$" . org-mode))
+  :ensure org-plus-contrib)
 
 (use-package treemacs-magit
   :after treemacs magit
