@@ -163,6 +163,16 @@
   :init
   (add-hook 'yaml-mode-hook '(lambda () (ansible 1))))
 
+;; terraform support
+(use-package terraform-mode
+  :ensure t)
+
+(use-package company-terraform
+  :ensure t
+  :after terraform-mode company
+  :init
+  (company-terraform-init))
+
 ;; smart parens for better matching paren workflow
 (use-package smartparens
   :ensure t
