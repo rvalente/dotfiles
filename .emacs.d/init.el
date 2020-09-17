@@ -1,6 +1,6 @@
 ;;; init.el --- my basic emacs setup for sane defaults
 
-;; Time-stamp: <2020-09-17 09:33:43 rovalent>
+;; Time-stamp: <2020-09-17 12:40:44 rovalent>
 ;; Copyright 2020 Ronald Valente
 
 ;;; Commentary:
@@ -242,10 +242,6 @@
   (setq org-directory "~/Documents/org")            ; default org directory for files
   (setq org-agenda-files '("~/Documents/org/")))    ; pull in agenda files
 
-;; Enable support for Golang
-(use-package ob-go
-  :ensure t)
-
 ;; org language support
 (org-babel-do-load-languages
  'org-babel-load-languages
@@ -253,7 +249,6 @@
    (sql        . t)
    (shell      . t)
    (sqlite     . t)
-   (go         . t)
    (emacs-lisp . nil)))
 
 ;; Setup web-mode for gohtml and html
@@ -277,14 +272,6 @@
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
-
-;; use and enable writegood-mode
-(use-package writegood-mode
-  :ensure t
-  :after markdown-mode org
-  :config
-  (add-hook 'markdown-mode-hook 'writegood-mode)
-  (add-hook 'org-mode-hook 'writegood-mode))
 
 (use-package yaml-mode
   :ensure t
