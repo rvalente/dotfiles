@@ -1,6 +1,6 @@
 ;;; init.el --- my basic emacs setup for sane defaults
 
-;; Time-stamp: <2020-09-15 15:48:18 rovalent>
+;; Time-stamp: <2020-09-17 09:33:43 rovalent>
 ;; Copyright 2020 Ronald Valente
 
 ;;; Commentary:
@@ -115,18 +115,19 @@
 
 (save-place-mode 1)                           ;; return to the last place we were in the file
 (show-paren-mode t)                           ;; show matching parens
-(delete-selection-mode t)                     ;; delete the selection with a keypress like every other editor
 (size-indication-mode t)                      ;; display the size of the buffer
 (global-hl-line-mode t)                       ;; highlight the current line we're on
+(global-auto-revert-mode t)                   ;; automatically revert buffer if changes are made outside of emacs
+(blink-cursor-mode -1)                        ;; no need to blink the cursor
+
+(column-number-mode)                          ;; track columns as well
+(global-display-line-numbers-mode)            ;; Use the new native line number mode
+
+(setq-default indent-tabs-mode nil)           ;; don't use tabs to indent
+(setq-default tab-width 8)                    ;; but maintain correct appearance
 (setq show-trailing-whitespace t)             ;; display trailing whitespace
 (setq require-final-newline t)                ;; Newline at the end of the file, always
-(global-auto-revert-mode t)                   ;; automatically revert buffer if changes are made outside of emacs
-
-(column-number-mode)
-(global-display-line-numbers-mode)
-
-(setq-default indent-tabs-mode nil)   ;; don't use tabs to indent
-(setq-default tab-width 8)            ;; but maintain correct appearance
+(delete-selection-mode t)                     ;; delete the selection with a keypress like every other editor
 
 ;; fancy title bar
 (when (memq window-system '(mac ns))
@@ -139,7 +140,8 @@
 (setq mouse-wheel-progressive-speed nil)
 
 ;; setup font with better retina support
-(set-face-attribute 'default nil :font "Fira Code Retina" :height 180)
+(set-face-attribute 'default nil :font "Fira Code Retina 14")
+(set-frame-font "Fira Code Retina 14")
 
 ;; Configure ~escape~ to exit out of a command sequence.
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -233,14 +235,12 @@
   :ensure t
   :pin org
   :config
-  (setq org-src-fontify-natively t)
-  (setq org-log-done t)
-  (setq org-confirm-babel-evaluate nil)
-  (setq org-src-tab-acts-natively t)
-  (setq org-cycle-separator-lines 1)
-  (setq org-ellipsis " ▼")
-  (setq org-directory "~/Documents/org")
-  (setq org-agenda-files '("~/Documents/org/")))
+  (setq org-confirm-babel-evaluate nil)             ; don't prompt to run src blocks
+  (setq org-src-fontify-natively t)                 ; syntax hilighting for src blocks
+  (setq org-log-done t)                             ; default log time when todo is completed
+  (setq org-ellipsis " ▼")                          ; fancy collapse of blocks
+  (setq org-directory "~/Documents/org")            ; default org directory for files
+  (setq org-agenda-files '("~/Documents/org/")))    ; pull in agenda files
 
 ;; Enable support for Golang
 (use-package ob-go
@@ -297,6 +297,11 @@
 (use-package sql
   :after sql-indent
   :ensure t)
+
+(use-package which-key
+  :ensure t
+  :config
+  (which-key-mode))
 
 ;; keep init.el clean
 (setq custom-file (concat user-emacs-directory "custom.el"))
