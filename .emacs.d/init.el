@@ -1,6 +1,6 @@
 ;;; init.el --- my basic emacs setup for sane defaults
 
-;; Time-stamp: <2020-09-17 16:27:12 rovalent>
+;; Time-stamp: <2020-09-17 16:29:13 rovalent>
 ;; Copyright 2020 Ronald Valente
 
 ;;; Commentary:
@@ -27,6 +27,7 @@
 (menu-bar-mode -1)                            ;; disable menu bar
 (setq inhibit-startup-message t)              ;; hide the startup message
 (setq use-dialog-box nil)                     ;; ensure everything stays in the minibuffer
+(setq-default cursor-type 'bar)               ;; use a bar instead of box
 
 ;; set initial and default frame size for emacs to be half the screen
 (if (display-graphic-p)
