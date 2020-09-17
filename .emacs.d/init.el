@@ -1,6 +1,6 @@
 ;;; init.el --- my basic emacs setup for sane defaults
 
-;; Time-stamp: <2020-09-17 12:40:44 rovalent>
+;; Time-stamp: <2020-09-17 16:27:12 rovalent>
 ;; Copyright 2020 Ronald Valente
 
 ;;; Commentary:
@@ -26,6 +26,7 @@
 (tooltip-mode -1)                             ;; disable tooltips
 (menu-bar-mode -1)                            ;; disable menu bar
 (setq inhibit-startup-message t)              ;; hide the startup message
+(setq use-dialog-box nil)                     ;; ensure everything stays in the minibuffer
 
 ;; set initial and default frame size for emacs to be half the screen
 (if (display-graphic-p)
@@ -87,7 +88,6 @@
   :config
   (load-theme 'doom-one t)
   (doom-themes-visual-bell-config)
-  (setq doom-themes-treemacs-theme "doom-colors")
   (doom-themes-treemacs-config)
   (doom-themes-org-config))
 
@@ -108,7 +108,6 @@
       )
 
 ;; Sane defaults
-(setq auto-revert-interval 1)                 ;; Refresh buffers fast
 (setq echo-keystrokes 0.1)                    ;; Show keystrokes asap
 (setq initial-scratch-message nil)            ;; Clean scratch buffer
 (setq initial-major-mode 'org-mode)           ;; Set scratch buffer to be org-mode
@@ -230,6 +229,11 @@
                           (agenda    . 5)
                           (projects  . 10))))
 
+;; Setup flycheck for syntax checking
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
+
 ;; org mode configuration
 (use-package org
   :ensure t
@@ -293,3 +297,5 @@
 ;; keep init.el clean
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file 'noerror)
+
+;;; init.el ends here
