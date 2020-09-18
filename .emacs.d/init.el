@@ -1,6 +1,6 @@
 ;;; init.el --- my basic emacs setup for sane defaults
 
-;; Time-stamp: <2020-09-17 16:29:13 rovalent>
+;; Time-stamp: <2020-09-18 13:18:50 rovalent>
 ;; Copyright 2020 Ronald Valente
 
 ;;; Commentary:
@@ -115,6 +115,7 @@
 
 (save-place-mode 1)                           ;; return to the last place we were in the file
 (show-paren-mode t)                           ;; show matching parens
+(electric-pair-mode)                          ;; insert a matching paren
 (size-indication-mode t)                      ;; display the size of the buffer
 (global-hl-line-mode t)                       ;; highlight the current line we're on
 (global-auto-revert-mode t)                   ;; automatically revert buffer if changes are made outside of emacs
@@ -235,6 +236,42 @@
   :ensure t
   :init (global-flycheck-mode))
 
+;; company, the best auto completion support around
+(use-package company
+  :ensure t
+  :hook (prog-mode . company-mode))
+
+;; LSP mode for all the things
+(use-package lsp-mode
+  :ensure t
+  :commands (lsp lsp-execute-code-action)
+  :hook ((go-mode . lsp-deferred)
+         (lsp-mode . lsp-enable-which-key-integration)
+         (lsp-mode . lsp-diagnostics-modeline-mode))
+  :bind ("C-c C-c" . #'lsp-execute-code-action)
+  :custom
+  (lsp-print-performance t)
+  (lsp-log-io t)
+  (lsp-diagnostics-modeline-scope :project)
+  (lsp-file-watch-threshold 5000)
+  (lsp-enable-file-watchers nil))
+
+(use-package lsp-ui
+  :ensure t
+  :custom
+  (lsp-ui-doc-delay 0.75)
+  (lsp-ui-doc-max-height 200)
+  :after lsp-mode)
+
+(use-package lsp-ivy
+  :ensure t
+  :after (ivy lsp-mode))
+
+(use-package company-lsp
+  :ensure t
+  :custom (company-lsp-enable-snippet t)
+  :after (company lsp-mode))
+
 ;; org mode configuration
 (use-package org
   :ensure t
@@ -245,7 +282,13 @@
   (setq org-log-done t)                             ; default log time when todo is completed
   (setq org-ellipsis " ▼")                          ; fancy collapse of blocks
   (setq org-directory "~/Documents/org")            ; default org directory for files
+  (setq org-default-notes-file (concat org-directory "notes.org"))
   (setq org-agenda-files '("~/Documents/org/")))    ; pull in agenda files
+
+;; UTF-8 bullets for org mode
+(use-package org-bullets
+  :ensure t
+  :hook (org-mode . org-bullets-mode))
 
 ;; org language support
 (org-babel-do-load-languages
@@ -294,6 +337,11 @@
   :ensure t
   :config
   (which-key-mode))
+
+;; even better paren detail for nested parens
+(use-package rainbow-delimiters
+  :ensure t
+  :hook ((prog-mode . rainbow-delimiters-mode)))
 
 ;; keep init.el clean
 (setq custom-file (concat user-emacs-directory "custom.el"))
