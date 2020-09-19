@@ -1,6 +1,6 @@
 ;;; init.el --- my basic emacs setup for sane defaults
 
-;; Time-stamp: <2020-09-18 13:18:50 rovalent>
+;; Time-stamp: <2020-09-19 07:13:38 rovalent>
 ;; Copyright 2020 Ronald Valente
 
 ;;; Commentary:
@@ -247,7 +247,7 @@
   :commands (lsp lsp-execute-code-action)
   :hook ((go-mode . lsp-deferred)
          (lsp-mode . lsp-enable-which-key-integration)
-         (lsp-mode . lsp-diagnostics-modeline-mode))
+         (lsp-mode . lsp-modeline-disagnostics-mode))
   :bind ("C-c C-c" . #'lsp-execute-code-action)
   :custom
   (lsp-print-performance t)
@@ -258,6 +258,7 @@
 
 (use-package lsp-ui
   :ensure t
+  :commands lsp-ui-mode
   :custom
   (lsp-ui-doc-delay 0.75)
   (lsp-ui-doc-max-height 200)
