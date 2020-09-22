@@ -1,6 +1,6 @@
 ;;; init.el --- my basic emacs setup for sane defaults
 
-;; Time-stamp: <2020-09-19 07:13:38 rovalent>
+;; Time-stamp: <2020-09-22 08:59:21 rovalent>
 ;; Copyright 2020 Ronald Valente
 
 ;;; Commentary:
@@ -283,6 +283,7 @@
   (setq org-log-done t)                             ; default log time when todo is completed
   (setq org-ellipsis " ▼")                          ; fancy collapse of blocks
   (setq org-directory "~/Documents/org")            ; default org directory for files
+  (setq org-startup-folded nil)                     ; by default display everything
   (setq org-default-notes-file (concat org-directory "notes.org"))
   (setq org-agenda-files '("~/Documents/org/")))    ; pull in agenda files
 
