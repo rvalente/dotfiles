@@ -1,6 +1,6 @@
 ;;; init.el --- my basic emacs setup for sane defaults
 
-;; Time-stamp: <2020-09-22 08:59:21 rovalent>
+;; Time-stamp: <2020-09-26 19:46:08 rovalent>
 ;; Copyright 2020 Ronald Valente
 
 ;;; Commentary:
@@ -231,6 +231,18 @@
                           (agenda    . 5)
                           (projects  . 10))))
 
+;; Enable go-mode
+(use-package go-mode
+  :ensure t
+  :mode ("\\.go\\'" . go-mode))
+
+;; Set up before-save hooks to format buffer and add/delete imports.
+;; Make sure you don't have other gofmt/goimports hooks enabled.
+(defun lsp-go-install-save-hooks ()
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+
 ;; Setup flycheck for syntax checking
 (use-package flycheck
   :ensure t
@@ -244,17 +256,21 @@
 ;; LSP mode for all the things
 (use-package lsp-mode
   :ensure t
-  :commands (lsp lsp-execute-code-action)
+  :commands (lsp lsp-deferred)
   :hook ((go-mode . lsp-deferred)
-         (lsp-mode . lsp-enable-which-key-integration)
-         (lsp-mode . lsp-modeline-disagnostics-mode))
-  :bind ("C-c C-c" . #'lsp-execute-code-action)
-  :custom
-  (lsp-print-performance t)
-  (lsp-log-io t)
-  (lsp-diagnostics-modeline-scope :project)
-  (lsp-file-watch-threshold 5000)
-  (lsp-enable-file-watchers nil))
+         (lsp-mode . lsp-enable-which-key-integration))
+  :config (progn
+	    (setq lsp-auto-guess-root t)
+	    (setq lsp-prefer-flymake nil))
+  (lsp-register-custom-settings '(("gopls.completeUnimported" t t)
+                                  ("gopls.staticcheck" t t))))
+
+;; Set up before-save hooks to format buffer and add/delete imports.
+;; Make sure you don't have other gofmt/goimports hooks enabled.
+(defun lsp-go-install-save-hooks ()
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
 
 (use-package lsp-ui
   :ensure t
@@ -272,6 +288,18 @@
   :ensure t
   :custom (company-lsp-enable-snippet t)
   :after (company lsp-mode))
+
+;; Optional - provides snippet support.
+(use-package yasnippet
+  :ensure t
+  :commands yas-minor-mode
+  :hook (go-mode . yas-minor-mode))
+
+(setq lsp-ui-doc-enable nil
+      lsp-ui-peek-enable t
+      lsp-ui-sideline-enable t
+      lsp-ui-imenu-enable t
+      lsp-ui-flycheck-enable t)
 
 ;; org mode configuration
 (use-package org
