@@ -4,16 +4,29 @@
 
 eval "$(starship init zsh)"
 
-## ZSH Plugins ---------------------------------------------------------------
-source /opt/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /opt/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+## Variables -----------------------------------------------------------------
+export GOPATH=$HOME/go
+export PATH=$HOME/bin:$PATH:$GOPATH/bin
+export PAGER='less -m'
+export ALTERNATE_EDITOR=""
+export EDITOR='emacsclient -t'
+export VISUAL='emacsclient -c -a emacs'
+
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 ## History -------------------------------------------------------------------
 HISTFILE=~/.zhistory
 HISTSIZE=10000
 SAVEHIST=10000
 
-autoload -Uz compinit && compinit
+# load completions
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+
+  autoload -Uz compinit
+  compinit
+fi
 
 ## Options -------------------------------------------------------------------
 setopt appendhistory        #
@@ -46,6 +59,7 @@ cdpath=(
 alias ls='exa'
 alias ll='exa -lbF --git'
 alias lt='exa --tree --level=2'
+alias e='emacsclient -c "$@"'
 alias gs='git status -sb'
 alias ga='git add'
 alias gc='git commit'
@@ -78,5 +92,5 @@ bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
 
 ## Chruby ---------------------------------------------------------------------
-source /opt/local/share/chruby/chruby.sh
-source /opt/local/share/chruby/auto.sh
+source /usr/local/share/chruby/chruby.sh
+source /usr/local/share/chruby/auto.sh

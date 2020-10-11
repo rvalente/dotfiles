@@ -20,9 +20,9 @@
   diff   = auto
   status = auto
 [diff]
-  tool      = vimdiff
-  algorithm = histogram
-  compactionHeuristic = true
+  tool = ediff
+[mergetool "ediff"]
+  cmd  = emacsclient -c -a \"\"  --eval \"(ediff-merge-files-with-ancestor \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" nil \\\"$MERGED\\\")\"
 [alias]
   patch = !git --no-pager diff --no-color
   ci    = commit

@@ -1,6 +1,6 @@
 ;;; init.el --- my basic emacs setup for sane defaults
 
-;; Time-stamp: <2020-09-26 19:46:08 rovalent>
+;; Time-stamp: <2020-10-10 12:36:59 rovalent>
 ;; Copyright 2020 Ronald Valente
 
 ;;; Commentary:
@@ -79,6 +79,9 @@
   :ensure t
   :config
   (exec-path-from-shell-initialize))
+
+;; Start Server
+(ignore-errors (server-start))
 
 ;; Additional UI Changes and Themes
 (use-package all-the-icons
