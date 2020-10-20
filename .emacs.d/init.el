@@ -1,6 +1,6 @@
 ;;; init.el --- my basic emacs setup for sane defaults
 
-;; Time-stamp: <2020-10-10 12:36:59 rovalent>
+;; Time-stamp: <2020-10-20 18:33:21 rovalent>
 ;; Copyright 2020 Ronald Valente
 
 ;;; Commentary:
@@ -80,8 +80,9 @@
   :config
   (exec-path-from-shell-initialize))
 
-;; Start Server
-(ignore-errors (server-start))
+;; Check if Server is running, Start Server if it is not
+(if 'server-process
+    (server-start))
 
 ;; Additional UI Changes and Themes
 (use-package all-the-icons
@@ -255,6 +256,15 @@
 (use-package company
   :ensure t
   :hook (prog-mode . company-mode))
+
+;; install json-mode
+(use-package json-mode
+  :ensure t)
+
+;; enable yaholding
+(use-package yafolding
+  :ensure t
+  :hook (prog-mode . yafolding-mode))
 
 ;; LSP mode for all the things
 (use-package lsp-mode
