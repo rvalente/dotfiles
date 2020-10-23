@@ -47,7 +47,7 @@ cat <<EOF > ~/.gnupg/gpg-agent.conf
 pinentry-program /usr/local/bin/pinentry-mac
 EOF
 
-killall gpg-agent
+killall gpg-agent || true
 
 # Link to /Applications
 ln -sf /usr/local/opt/emacs-plus@27/Emacs.app /Applications

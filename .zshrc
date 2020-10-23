@@ -2,7 +2,7 @@
 #
 # Global Order: zshenv > [zprofile] > zshrc > [zlogin]
 
-eval "$(starship init zsh)"
+eval "$(/usr/local/bin/starship init zsh)"
 
 ## Variables -----------------------------------------------------------------
 export GOPATH=$HOME/go
@@ -74,10 +74,10 @@ alias tf='tail -f'
 alias psg='ps auxww | grep'
 alias gitdf='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias flushdns='sudo killall -HUP mDNSResponder; sudo killall mDNSResponderHelper; sudo dscacheutil -flushcache'
+alias brewu='brew update && brew upgrade && brew upgrade --cask'
 
 # Helper Aliases
 alias grep='grep --color=auto' # Always highlight grep search term
-alias ping='ping -c 5'         # Pings with 5 packets, not unlimited
 alias df='df -h'               # Disk free, in gigabytes, not bytes
 alias du='du -h -c'            # Calculate total disk usage for a folder
 
