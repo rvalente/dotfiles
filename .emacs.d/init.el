@@ -1,6 +1,6 @@
 ;;; init.el --- my basic emacs setup for sane defaults
 
-;; Time-stamp: <2020-10-20 18:33:21 rovalent>
+;; Time-stamp: <2020-10-30 08:20:44 rovalent>
 ;; Copyright 2020 Ronald Valente
 
 ;;; Commentary:
@@ -80,10 +80,6 @@
   :config
   (exec-path-from-shell-initialize))
 
-;; Check if Server is running, Start Server if it is not
-(if 'server-process
-    (server-start))
-
 ;; Additional UI Changes and Themes
 (use-package all-the-icons
   :ensure t)
@@ -133,12 +129,6 @@
 (setq show-trailing-whitespace t)             ;; display trailing whitespace
 (setq require-final-newline t)                ;; Newline at the end of the file, always
 (delete-selection-mode t)                     ;; delete the selection with a keypress like every other editor
-
-;; fancy title bar
-(when (memq window-system '(mac ns))
-  (add-to-list 'default-frame-alist '(ns-appearance . dark)) ; nil for dark text
-  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-  (setq ns-use-proxy-icon nil))
 
 ;; improve scrolling on macOS
 (setq mouse-wheel-scroll-amount (quote (0.01)))
@@ -332,6 +322,28 @@
 (use-package org-bullets
   :ensure t
   :hook (org-mode . org-bullets-mode))
+
+(use-package org-journal
+  :ensure t)
+
+(use-package org-roam
+  :ensure t
+  :hook
+  (after-init . org-roam-mode)
+  :custom
+  (org-roam-directory "/Volumes/code/roam")
+      :bind (:map org-roam-mode-map
+              (("C-c n l" . org-roam)
+               ("C-c n f" . org-roam-find-file)
+               ("C-c n g" . org-roam-graph))
+              :map org-mode-map
+              (("C-c n i" . org-roam-insert))
+              (("C-c n I" . org-roam-insert-immediate))))
+
+(use-package company-org-roam
+  :ensure t
+  :config
+  (push 'company-org-roam company-backends))
 
 ;; org language support
 (org-babel-do-load-languages

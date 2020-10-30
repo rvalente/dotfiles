@@ -1,19 +1,12 @@
 [core]
   preloadindex = true
   excludesfile = ~/.gitignore
-  pager = delta --theme='Nord'
+  pager = delta
   whitespace = trailing-space,space-before-tab,indent-with-non-tab
   autocrlf = input
   editor = vim
 [interactive]
   diffFilter = delta --color-only
-[delta]
-  features = decorations
-  whitespace-error-style = 22 reverse
-[delta "decorations"]
-  commit-decoration-style = bold yellow box ul
-  file-style = bold yellow ul
-  file-decoration-style = none
 [color]
   ui = true
   branch = auto
