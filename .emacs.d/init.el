@@ -1,6 +1,6 @@
 ;;; init.el --- my basic emacs setup for sane defaults
 
-;; Time-stamp: <2020-10-30 08:20:44 rovalent>
+;; Time-stamp: <2020-10-30 08:47:06 rovalent>
 ;; Copyright 2020 Ronald Valente
 
 ;;; Commentary:
@@ -397,6 +397,15 @@
 (use-package rainbow-delimiters
   :ensure t
   :hook ((prog-mode . rainbow-delimiters-mode)))
+
+;; Enable Terraform Dev Environment
+(use-package terraform-mode
+  :ensure t)
+
+(use-package company-terraform
+  :ensure t
+  :config
+  (company-terraform-init))
 
 ;; keep init.el clean
 (setq custom-file (concat user-emacs-directory "custom.el"))
