@@ -1,6 +1,6 @@
 ;;; init.el --- my basic emacs setup for sane defaults
 
-;; Time-stamp: <2020-10-30 08:47:06 rovalent>
+;; Time-stamp: <2020-10-30 10:20:45 rovalent>
 ;; Copyright 2020 Ronald Valente
 
 ;;; Commentary:
@@ -141,6 +141,31 @@
 ;; Configure ~escape~ to exit out of a command sequence.
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
+;; for emacs-mac, reset command to super
+(setq mac-command-key-is-meta nil)
+(setq mac-option-key-is-meta t)
+(setq mac-command-modifier 'super)
+(setq mac-option-modifier 'meta)
+
+;; command left and right move to begining and end of line respectively
+(global-set-key (kbd "s-<right>") 'move-end-of-line)
+(global-set-key (kbd "s-<left>") 'move-beginning-of-line)
+
+;; copy with command-c
+(global-set-key (kbd "s-c") 'kill-ring-save)
+
+;; command-a select all in buffer
+(global-set-key (kbd "s-a") 'mark-whole-buffer)
+
+;; command-q to quit emacs
+(global-set-key (kbd "s-q") 'save-buffers-kill-terminal)
+
+;; paste with command-v
+(global-set-key (kbd "s-v") 'clipboard-yank)
+
+;; command-s will now save
+(global-set-key (kbd "s-s") 'save-buffer)
+
 ;; Remove odd undo binding, and prepare it for search with swiper
 (global-unset-key (kbd "C-/"))
 
@@ -190,7 +215,7 @@
   ("C-c p" . projectile-command-map)
   :config
   (projectile-mode +1)
-  (setq projectile-project-search-path '("~/code/")))
+  (setq projectile-project-search-path '("/Volumes/code/")))
 
 (use-package treemacs
   :ensure t
