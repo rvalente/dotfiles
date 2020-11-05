@@ -1,6 +1,6 @@
 ;;; init.el --- my basic emacs setup for sane defaults
 
-;; Time-stamp: <2020-10-30 10:20:45 rovalent>
+;; Time-stamp: <2020-11-05 08:45:06 rovalent>
 ;; Copyright 2020 Ronald Valente
 
 ;;; Commentary:
@@ -47,6 +47,9 @@
   (progn
     (setq initial-frame-alist '((tool-bar-lines . 0)))
     (setq default-frame-alist '((tool-bar-lines . 0)))))
+
+;; UTF-8 as default encoding
+(set-language-environment "UTF-8")
 
 ;; Setup package, use-package, and repositories
 (require 'package)
@@ -169,6 +172,16 @@
 ;; Remove odd undo binding, and prepare it for search with swiper
 (global-unset-key (kbd "C-/"))
 
+;;; Let's also assign C-z to undo here
+(global-set-key (kbd "C-z") 'undo) ;Emacs default is bound to hide Emacs.
+
+;;; Define key bindings for Org-roam
+;(global-set-key (kbd "C-c n r") #'org-roam-buffer-toggle-display)
+;(global-set-key (kbd "C-c n i") #'org-roam-insert)
+;(global-set-key (kbd "C-c n f") #'org-roam-find-file)
+;(global-set-key (kbd "C-c n b") #'org-roam-switch-to-buffer)
+;(global-set-key (kbd "C-c n d") #'org-roam-find-directory)
+
 ;; write to "Time-stamp: <>" as long as it is within the first 8 lines of the file
 (add-hook 'before-save-hook 'time-stamp)
 
@@ -200,7 +213,7 @@
 ;; enhanced version of isearch
 (use-package swiper
   :ensure t
-  :bind (("C-/" . counsel-grep-or-swiper)))
+  :bind ("C-/" . counsel-grep-or-swiper))
 
 ;; the best git support ever
 (use-package magit
@@ -329,15 +342,28 @@
       lsp-ui-imenu-enable t
       lsp-ui-flycheck-enable t)
 
+;; Setup deft for great content searching
+(use-package deft
+  :ensure t
+  :bind ("C-c n d" . deft)
+  :commands (deft)
+  :config (setq deft-extensions '("txt" "tex" "org" "md")
+                deft-directory "/Volumes/code/roam"
+                deft-recursive t
+                deft-default-extension "org"
+                deft-use-filter-string-for-filename t))
+
 ;; org mode configuration
 (use-package org
   :ensure t
   :pin org
+  :bind (("C-c c" . org-capture)
+         ("C-c a" . org-agenda))
   :config
+  (setq org-modules (quote (org-protocol)))
   (setq org-confirm-babel-evaluate nil)             ; don't prompt to run src blocks
   (setq org-src-fontify-natively t)                 ; syntax hilighting for src blocks
   (setq org-log-done t)                             ; default log time when todo is completed
-  (setq org-ellipsis " ▼")                          ; fancy collapse of blocks
   (setq org-directory "~/Documents/org")            ; default org directory for files
   (setq org-startup-folded nil)                     ; by default display everything
   (setq org-default-notes-file (concat org-directory "notes.org"))
@@ -346,27 +372,65 @@
 ;; UTF-8 bullets for org mode
 (use-package org-bullets
   :ensure t
+  :after org
   :hook (org-mode . org-bullets-mode))
 
 (use-package org-journal
-  :ensure t)
+  :ensure t
+  :after org
+  :bind
+  ("C-c n j" . org-journal-new-entry)
+  :custom
+  (org-journal-date-prefix "#+title: ")
+  (org-journal-file-format "%Y-%m-%d.org")
+  (org-journal-dir "/Volumes/code/roam")
+  (org-journal-date-format "%A, %d %B %Y"))
 
 (use-package org-roam
   :ensure t
-  :hook
-  (after-init . org-roam-mode)
-  :custom
-  (org-roam-directory "/Volumes/code/roam")
-      :bind (:map org-roam-mode-map
+  :after org
+  :hook (after-init . org-roam-mode)
+  :config
+  (setq org-roam-directory "/Volumes/code/roam"
+        org-roam-db-location "~/.emacs.d/org-roam.db")
+  :bind (:map org-roam-mode-map
               (("C-c n l" . org-roam)
                ("C-c n f" . org-roam-find-file)
-               ("C-c n g" . org-roam-graph))
+               ("C-c n g" . org-roam-graph)
+               ("C-c n b" . org-roam-switch-to-buffer)
+               ("C-c n r" . org-roam-find-ref)
+               ("C-c n d" . org-roam-find-directory))
               :map org-mode-map
-              (("C-c n i" . org-roam-insert))
-              (("C-c n I" . org-roam-insert-immediate))))
+              (("C-c n i" . org-roam-insert))))
+
+(use-package org-roam-protocol)
+
+(use-package org-roam-capture
+  :after org-roam
+  :config
+  (setq org-roam-capture-templates
+        '(("d" "default" plain (function org-roam-capture--get-point)
+           "%?"
+           :file-name "%<%Y%m%d%H%M%S>-${slug}"
+           :head "#+title: ${title}\n#+roam_alias:\n#+roam_tags:\n"
+           :unnarrowed t))
+        org-roam-capture-ref-templates
+        '(("r" "ref" plain (function org-roam-capture--get-point)
+           "#+roam_key: ${ref}\n%?"
+           :file-name "%<%Y%m%d%H%M%S>_web_${slug}"
+           :head "#+title: ${title}]\n#+roam_tags: website\n"
+           :unnarrowed t))
+        org-roam-dailies-capture-templates
+        '(("d" "daily" plain (function org-roam-capture--get-point)
+           ""
+           :immediate-finish t
+           :file-name "journal_%<%Y-%m-%d>"
+           :head "#+title: %<%Y-%m-%d %a>\n#+roam_tags: journal\n"))
+        ))
 
 (use-package company-org-roam
   :ensure t
+  :after org company
   :config
   (push 'company-org-roam company-backends))
 
@@ -378,6 +442,11 @@
    (shell      . t)
    (sqlite     . t)
    (emacs-lisp . nil)))
+
+;(use-package org-download
+;  :after org
+;  :bind ("s-!" . org-download-screenshot)
+;  :config (setq org-download-screenshot-method "/usr/sbin/screencapture -i %s"))
 
 ;; Setup web-mode for gohtml and html
 (use-package web-mode
@@ -431,6 +500,12 @@
   :ensure t
   :config
   (company-terraform-init))
+
+(defun reload-init-file ()
+  (interactive)
+  (load-file user-init-file))
+
+(global-set-key (kbd "C-c r") 'reload-init-file)    ; Reload .emacs file
 
 ;; keep init.el clean
 (setq custom-file (concat user-emacs-directory "custom.el"))
