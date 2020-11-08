@@ -11,7 +11,7 @@ bash go-migrate gopass py38-ansible port_cutleaves multimarkdown hugo gh
 bash-completion vim emacs-mac-app)
 
 ## Install our packages
-for port in $PORTS; do
+for port in ${PORTS[@]}; do
   sudo port -N install $port
 done
 
