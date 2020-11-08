@@ -1,6 +1,6 @@
 ;;; init.el --- my basic emacs setup for sane defaults
 
-;; Time-stamp: <2020-11-05 08:45:06 rovalent>
+;; Time-stamp: <2020-11-08 10:56:04 rovalent>
 ;; Copyright 2020 Ronald Valente
 
 ;;; Commentary:
@@ -82,6 +82,16 @@
   :ensure t
   :config
   (exec-path-from-shell-initialize))
+
+;; fixup for missing gpg
+(setenv "PATH" (concat (getenv "PATH") ":/opt/local/bin"))
+(setq exec-path (append exec-path '("/opt/local/bin")))
+
+;; setup default shell
+(setq explicit-shell-file-name "/opt/local/bin/bash")
+(setq shell-file-name "bash")
+(setenv "SHELL" shell-file-name)
+(global-set-key [f1] 'ansi-term)
 
 ;; Additional UI Changes and Themes
 (use-package all-the-icons
@@ -174,13 +184,6 @@
 
 ;;; Let's also assign C-z to undo here
 (global-set-key (kbd "C-z") 'undo) ;Emacs default is bound to hide Emacs.
-
-;;; Define key bindings for Org-roam
-;(global-set-key (kbd "C-c n r") #'org-roam-buffer-toggle-display)
-;(global-set-key (kbd "C-c n i") #'org-roam-insert)
-;(global-set-key (kbd "C-c n f") #'org-roam-find-file)
-;(global-set-key (kbd "C-c n b") #'org-roam-switch-to-buffer)
-;(global-set-key (kbd "C-c n d") #'org-roam-find-directory)
 
 ;; write to "Time-stamp: <>" as long as it is within the first 8 lines of the file
 (add-hook 'before-save-hook 'time-stamp)
