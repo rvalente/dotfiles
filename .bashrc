@@ -8,7 +8,7 @@ esac
 
 ## Variables -----------------------------------------------------------------
 export GOPATH=$HOME/go
-export PATH="$GOPATH:/opt/local/bin:/opt/local/sbin:/usr/sbin:/sbin:/usr/bin:/bin:/Library/Apple/usr/bin"
+export PATH="$GOPATH:/opt/local/bin:/opt/local/sbin:/usr/sbin:/sbin:/usr/bin:/bin:/Library/Apple/usr/bin:/usr/local/sbin:/usr/local/bin"
 
 export PAGER='less -m'
 export EDITOR='vim'
