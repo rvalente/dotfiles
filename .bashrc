@@ -90,11 +90,15 @@ ulimit -c 0
 
 ## Completion ------------------------------------------------------------------
 if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
-    . /opt/local/etc/profile.d/bash_completion.sh
+    source /opt/local/etc/profile.d/bash_completion.sh
+fi
+
+if [ -f /opt/local/share/git/contrib/completion/git-completion.bash ]; then
+    source /opt/local/share/git/contrib/completion/git-completion.bash
 fi
 
 if [ -f /opt/local/share/git/contrib/completion/git-prompt.sh ]; then
-    . /opt/local/share/git/contrib/completion/git-prompt.sh
+    source /opt/local/share/git/contrib/completion/git-prompt.sh
 fi
 
 if [ $(command -v gopass) ]; then
