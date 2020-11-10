@@ -1,6 +1,6 @@
 ;;; init.el --- my basic emacs setup for sane defaults
 
-;; Time-stamp: <2020-11-08 10:56:04 rovalent>
+;; Time-stamp: <2020-11-09 20:13:54 rovalent>
 ;; Copyright 2020 Ronald Valente
 
 ;;; Commentary:
@@ -446,10 +446,18 @@
    (sqlite     . t)
    (emacs-lisp . nil)))
 
-;(use-package org-download
-;  :after org
-;  :bind ("s-!" . org-download-screenshot)
-;  :config (setq org-download-screenshot-method "/usr/sbin/screencapture -i %s"))
+(use-package org-download
+  :ensure t
+  :after org
+  :defer nil
+  :bind ("M-s-1" . org-download-screenshot)
+  :custom
+  (org-download-method 'directory)
+  (org-download-image-dir "images")
+  (org-download-heading-lvl nil)
+  (org-download-timestamp "%Y%m%d-%H%M%S_")
+  (org-image-actual-width 300)
+  (org-download-screenshot-method "/usr/sbin/screencapture -i %s"))
 
 ;; Setup web-mode for gohtml and html
 (use-package web-mode
