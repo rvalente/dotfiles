@@ -1,6 +1,6 @@
 ;;; init.el --- my basic emacs setup for sane defaults
 
-;; Time-stamp: <2020-11-09 20:13:54 rovalent>
+;; Time-stamp: <2020-11-10 07:32:28 rovalent>
 ;; Copyright 2020 Ronald Valente
 
 ;;; Commentary:
@@ -370,7 +370,7 @@
   (setq org-directory "~/Documents/org")            ; default org directory for files
   (setq org-startup-folded nil)                     ; by default display everything
   (setq org-default-notes-file (concat org-directory "notes.org"))
-  (setq org-agenda-files '("~/Documents/org/")))    ; pull in agenda files
+  (setq org-agenda-files '("/Volumes/code/roam/")))    ; pull in agenda files
 
 ;; UTF-8 bullets for org mode
 (use-package org-bullets
